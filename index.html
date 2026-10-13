@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cheese Toast</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="description" content="Cheese Toast: Jim Bumgardner's teapot-in-space arcade game from 1993, now in your browser.">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://ct.krazydad.com/">
+<!-- social cards (image drawn by tools/share-card.html) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Cheese Toast">
+<meta property="og:title" content="Cheese Toast">
+<meta property="og:description" content="A teapot-in-space arcade game: blast croissants, toasters and chattering teeth. Play free in your browser.">
+<meta property="og:url" content="https://ct.krazydad.com/">
+<meta property="og:image" content="https://ct.krazydad.com/assets/share.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cheese Toast title over a starry sky: a teapot in a shield bubble fires at an exploding croissant while a toaster, muffins, chattering teeth and other breakfast foes swarm around.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cheese Toast">
+<meta name="twitter:description" content="A teapot-in-space arcade game: blast croissants, toasters and chattering teeth. Play free in your browser.">
+<meta name="twitter:image" content="https://ct.krazydad.com/assets/share.jpg">
+<meta name="twitter:image:alt" content="Cheese Toast title over a starry sky: a teapot fires at an exploding croissant amid a swarm of breakfast foes.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cheese Toast">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="assets/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<!-- Comic Neue Bold: the page's lettering on every device (closest Google Font to Chalkboard) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap">
+<link rel="stylesheet" href="css/cheesetoast.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<div id="hud">
+  <button id="btn-fullscreen" class="hud-btn" aria-label="Full screen" title="Full screen (F)">
+    <svg viewBox="0 0 24 24" class="icon-enter"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+    <svg viewBox="0 0 24 24" class="icon-exit"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg>
+  </button>
+  <button id="btn-sound" class="hud-btn" aria-label="Sound" title="Sound on/off (M)">
+    <svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z" class="fill"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" class="icon-on"/><path d="M16 9l5 6M21 9l-5 6" class="icon-off"/></svg>
+  </button>
+  <button id="btn-settings" class="hud-btn hidden" aria-label="Settings" title="Settings">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+  </button>
+  <button id="btn-end" class="hud-btn hidden" aria-label="End game" title="End game (Q)">
+    <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <button id="btn-pause" class="hud-btn hidden" aria-label="Pause" title="Pause (P)">
+    <svg viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></svg>
+  </button>
+</div>
+
+<!-- multiplayer test site: mode picker (attract) and session status (play) -->
+<div id="mp-bar" class="hidden">
+  <span class="mp-label">Play</span>
+  <button id="mp-single" class="mp-mode" title="Solo, just you (S)">Solo</button>
+  <button id="mp-coop" class="mp-mode" title="Co-op (C)">Co-op</button>
+  <button id="mp-duel" class="mp-mode" title="Duel, one on one (D)">Duel</button>
+  <button id="mp-melee" class="mp-mode" title="Melee, everyone against everyone (E)">Melee</button>
+  <a id="mp-games" class="mp-mode mp-link" href="games/" title="Games being played now: pick one to join">Games</a>
+  <button id="mp-name" class="mp-mode mp-name" title="Change your name">you</button>
+  <button id="mp-settings" class="mp-mode mp-gear" aria-label="Settings" title="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+  <span id="mp-waiting"></span>
+</div>
+<div id="mp-status" class="hidden"></div>
+<form id="name-dlg" class="hidden" autocomplete="off">
+  <div class="name-box">
+    <div id="name-title">What should we call you?</div>
+    <input id="name-input" type="text" maxlength="20" spellcheck="false" enterkeyhint="go" aria-label="Your name">
+    <div id="name-msg"></div>
+    <div class="name-btns">
+      <button type="button" id="name-cancel" class="mp-mode">Cancel</button>
+      <button type="submit" id="name-ok" class="mp-mode on">OK</button>
+    </div>
+  </div>
+</form>
+<form id="chat" class="hidden" autocomplete="off">
+  <input id="chat-input" type="text" maxlength="100" spellcheck="false" enterkeyhint="send"
+    placeholder="Say something (Enter sends, Esc cancels)" aria-label="Chat message">
+</form>
+
+<div id="touch" class="hidden">
+  <div class="tc-cluster" id="tc-left">
+    <!-- the steering circle (input.js attachStick): point where to face; double-tap the middle to brake -->
+    <div class="tc-stick" id="tc-stick">
+      <div class="tc-stick-brake"><span>brake &times;2</span></div>
+      <div class="tc-stick-aim"></div>
+      <div class="tc-stick-knob"></div>
+    </div>
+  </div>
+  <div class="tc-cluster" id="tc-right">
+    <div class="tc-btn tc-shield" data-flag="Shield"><span>shield</span></div>
+    <div class="tc-btn tc-thrust" data-flag="Thrust"><span>thrust</span></div>
+    <div class="tc-btn tc-fire" data-flag="Fire"><span>fire</span></div>
+  </div>
+</div>
+
+<div id="start" class="overlay">
+  <div class="panel">
+    <h1>Cheese Toast</h1>
+    <p id="start-msg">Loading&hellip;</p>
+    <div class="bar"><div id="start-bar"></div></div>
+  </div>
+</div>
+
+<div id="paused" class="overlay hidden">
+  <div class="panel">
+    <h2 id="paused-title">Paused</h2>
+    <p id="paused-note" class="hidden"></p>
+    <button id="btn-resume" class="pill">Resume</button>
+    <button id="btn-quit" class="pill pill-dim">End game</button>
+  </div>
+</div>
+
+<div id="settings" class="overlay hidden" role="dialog" aria-labelledby="settings-title">
+  <div class="settings-box">
+    <h2 id="settings-title">Settings</h2>
+    <div class="set-group">
+      <div class="set-head">You</div>
+      <label class="set-row"><span>Sound</span><input type="checkbox" id="set-sound" class="switch"></label>
+      <label class="set-row"><span>Volume</span><input type="range" id="set-volume" min="0" max="100" step="5"></label>
+      <label class="set-row" id="set-fs-row"><span>Full screen</span><input type="checkbox" id="set-fs" class="switch"></label>
+      <div class="set-row" id="set-name-row"><span>Name</span><button type="button" id="set-name" class="mp-mode">you</button></div>
+      <label class="set-row"><span>Names under teapots</span><input type="checkbox" id="set-tags" class="switch"></label>
+      <label class="set-row"><span>Reduce motion <span class="set-dim">(no spins)</span></span><input type="checkbox" id="set-motion" class="switch"></label>
+    </div>
+    <div class="set-group" id="set-touch">
+      <div class="set-head">Touch controls</div>
+      <label class="set-row"><span>Left-handed <span class="set-dim">(fire on the left)</span></span><input type="checkbox" id="set-lefty" class="switch"></label>
+      <label class="set-row"><span>Button size</span><input type="range" id="set-btn" min="80" max="130" step="5"></label>
+    </div>
+    <div class="set-group" id="set-mp">
+      <div class="set-head">Playing with others</div>
+      <div class="set-row"><span>Co-op and melee: up to</span>
+        <span class="seg" id="set-max" role="radiogroup" aria-label="Most players in a game">
+          <button type="button" data-n="2" role="radio">2</button><button type="button" data-n="3" role="radio">3</button><button type="button" data-n="4" role="radio">4</button>
+        </span></div>
+      <label class="set-row" id="set-chat-row"><span>Chat</span><input type="checkbox" id="set-chat" class="switch"></label>
+      <div id="set-mutes"></div>
+    </div>
+    <div class="set-group" id="set-game">
+      <div class="set-head">This game <span class="set-dim">(everyone in it sees this)</span></div>
+      <label class="set-row"><span>Let bots join</span><input type="checkbox" id="set-bots" class="switch"></label>
+      <div class="set-note" id="set-bots-note"></div>
+    </div>
+    <details class="set-group set-help" id="set-help">
+      <summary class="set-head">Controls</summary>
+      <table class="keys" id="set-keys">
+        <tr><td>Turn</td><td>&larr; &rarr;</td></tr>
+        <tr><td>Thrust</td><td>Z, X, Shift, Option</td></tr>
+        <tr><td>Fire (hold)</td><td>Space</td></tr>
+        <tr><td>Shield</td><td>A, S, &uarr;, Ctrl</td></tr>
+        <tr><td>Brake</td><td>&darr;</td></tr>
+        <tr><td>Pause / end game</td><td>P or Esc / Q</td></tr>
+        <tr><td>Chat (with others)</td><td>Enter or T</td></tr>
+        <tr><td>Sound / full screen</td><td>M / F</td></tr>
+        <tr><td>Zoom / roll</td><td>+ &minus; / [ ]</td></tr>
+        <tr><td>Pick a game (top line)</td><td>S, C, D, E</td></tr>
+      </table>
+      <p class="set-note" id="set-touch-help">Left thumb: point in the circle to turn and face that way (drag to keep steering);
+        double-tap its middle to brake. Right thumb: fire (big), thrust, shield.
+        The buttons at the bottom: full screen, sound, settings, pause.</p>
+    </details>
+    <div class="set-note" id="set-away-note"></div>
+    <div class="set-btns">
+      <button type="button" id="set-close" class="pill">Back to the game</button>
+      <button type="button" id="set-quit" class="pill pill-dim">End game</button>
+    </div>
+  </div>
+</div>
+
+<div id="rotate" class="overlay" aria-live="polite">
+  <div class="panel">
+    <svg viewBox="0 0 64 64" class="rotate-phone" aria-hidden="true"><rect x="20" y="8" width="24" height="48" rx="4"/><path d="M28 50h8"/></svg>
+    <p>Turn your device sideways to play</p>
+  </div>
+</div>
+
+<div id="fs-help" class="overlay hidden">
+  <div class="panel">
+    <h2>Play full screen</h2>
+    <p>Safari on iPhone can't hide its bars for a web page, but Cheese Toast
+    runs full screen when you start it from your Home Screen:</p>
+    <ol>
+      <li>Tap the <b>&hellip;</b> button.</li>
+      <li>Choose <b>Share</b>.</li>
+      <li>Scroll to the bottom and choose <b>Add to Home Screen</b>.</li>
+      <li>Open Cheese Toast from its new Home Screen icon.</li>
+    </ol>
+    <button id="btn-fs-help-close" class="pill">Got it</button>
+  </div>
+</div>
+
+<form id="engrave" class="hidden" autocomplete="off">
+  <input id="engrave-name" type="text" maxlength="32" spellcheck="false" autocapitalize="characters" enterkeyhint="done" aria-label="Your name">
+  <button id="engrave-done" class="pill" type="submit">Engrave</button>
+</form>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

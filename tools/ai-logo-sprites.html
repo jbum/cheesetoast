@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI logo sprite sheet</title>
+<!--
+  Renders the "AI asterisk" sprite sheet: the OpenAI and Anthropic logos
+  extruded in 3D, tumbling in opposite directions like CT_III's asterisks.
+  Logo outlines come from Simple Icons (https://simpleicons.org).
+
+  Rows (64 px cells, FRAMES per row, one full turn per row):
+    0  both logos joined (counter-rotating)
+    1  OpenAI alone      (same angle as row 0, frame for frame)
+    2  Anthropic alone   (same angle as row 0, frame for frame)
+  ?second=claude swaps the Anthropic "A\" mark for Claude's spark.
+
+  Open through the dev server (tools/ai-logo-sprites.html); a headless browser
+  can read window.sheetPNG once window.sheetReady is true.
+-->
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+} }
+</script>
+<style>
+  body { margin: 0; background: #1b1d26; color: #ccc; font: 13px system-ui; padding: 12px; }
+  canvas { image-rendering: pixelated; display: block; margin-top: 8px; }
+</style>
+</head>
+<body>
+<div id="status">rendering...</div>
+<canvas id="sheet"></canvas>
+<script type="module">
+import * as THREE from 'three';
+import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+const params = new URLSearchParams(location.search);
+const SECOND = params.get('second') || 'anthropic';     // or 'claude'
+const FRAMES = 24;          // one full turn: a logo's back is its mirror image
+const CELL = 64;            // sheet cell size
+const RENDER = 256;         // supersampled render size per frame
+const TILT = -15;           // tumble axis tilt in degrees, like the asterisks
+// The second logo starts a quarter turn ahead.  Without it, +angle and -angle
+// about the same axis give identical silhouettes (a flat shape tipped forward
+// by x looks like one tipped back by x), so the two seem to spin as one.  With
+// it they sweep through each other twice a turn, like CT_III's asterisks,
+// whose halves go edge-on at different frames.
+const PHASE = Math.PI / 2;
+
+const COLORS = {
+  openai: { color: 0xe9edf3, metalness: 0.55, roughness: 0.28 },     // polished silver
+  anthropic: { color: 0xd4835f, metalness: 0.35, roughness: 0.38 }, // terracotta
+  claude: { color: 0xd97757, metalness: 0.35, roughness: 0.38 },
+};
+
+async function logoMesh(name) {
+  const svg = await (await fetch(`https://cdn.jsdelivr.net/npm/simple-icons@13/icons/${name}.svg`)).text();
+  const data = new SVGLoader().parse(svg);
+  const shapes = data.paths.flatMap((p) => SVGLoader.createShapes(p));
+  const geo = new THREE.ExtrudeGeometry(shapes, {
+    depth: 2.4, curveSegments: 24,
+    bevelEnabled: true, bevelThickness: 0.45, bevelSize: 0.3, bevelSegments: 4,
+  });
+  geo.scale(1, -1, 1);                 // SVG y runs down
+  geo.computeVertexNormals();
+  geo.center();
+  const m = COLORS[name];
+  const mat = new THREE.MeshStandardMaterial({ ...m, side: THREE.DoubleSide });
+  return new THREE.Mesh(geo, mat);
+}
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+renderer.setSize(RENDER, RENDER);
+renderer.setClearColor(0x000000, 0);
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(renderer).fromScene(new RoomEnvironment(), 0.04).texture;
+const key = new THREE.DirectionalLight(0xffffff, 2.2);
+key.position.set(-6, 9, 12);
+scene.add(key);
+scene.add(new THREE.AmbientLight(0xffffff, 0.35));
+
+const half = 15.5;                     // logos are 24 units across
+const camera = new THREE.OrthographicCamera(-half, half, half, -half, 0.1, 100);
+camera.position.set(0, 0, 40);
+
+const [a, b] = await Promise.all([logoMesh('openai'), logoMesh(SECOND)]);
+const axis = new THREE.Vector3(Math.cos(TILT * Math.PI / 180), Math.sin(TILT * Math.PI / 180), 0);
+const pivotA = new THREE.Group(); pivotA.add(a); scene.add(pivotA);
+const pivotB = new THREE.Group(); pivotB.add(b); scene.add(pivotB);
+
+const sheet = document.getElementById('sheet');
+sheet.width = CELL * FRAMES;
+sheet.height = CELL * 3;
+const sctx = sheet.getContext('2d');
+sctx.imageSmoothingQuality = 'high';
+
+// row: 0 both, 1 OpenAI only, 2 second logo only
+for (let row = 0; row < 3; row++) {
+  pivotA.visible = row !== 2;
+  pivotB.visible = row !== 1;
+  for (let f = 0; f < FRAMES; f++) {
+    const ang = (f / FRAMES) * Math.PI * 2;
+    pivotA.quaternion.setFromAxisAngle(axis, ang);     // OpenAI tumbles one way...
+    pivotB.quaternion.setFromAxisAngle(axis, PHASE - ang);   // ...the other logo the other
+    renderer.render(scene, camera);
+    sctx.drawImage(renderer.domElement, 0, 0, RENDER, RENDER, f * CELL, row * CELL, CELL, CELL);
+  }
+}
+document.getElementById('status').textContent = `done: ${FRAMES} frames x 3 rows, ${CELL}px cells, second logo: ${SECOND}`;
+window.sheetPNG = sheet.toDataURL('image/png');
+window.sheetReady = true;
+</script>
+</body>
+</html>

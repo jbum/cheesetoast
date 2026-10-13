@@ -1,0 +1,20 @@
+# systemd unit for the multiplayer matchmaker (ctm.krazydad.com).  Install with:
+#   sudo install -m 644 ct-match.service /etc/systemd/system/ctm-match.service
+#   sudo systemctl daemon-reload && sudo systemctl enable --now ctm-match
+[Unit]
+Description=Cheese Toast multiplayer matchmaker (ctm.krazydad.com)
+After=network.target
+
+[Service]
+Type=simple
+User=ct
+Group=ct
+WorkingDirectory=/home/ct/ctm-match
+ExecStart=/usr/bin/python3 /home/ct/ctm-match/match_server.py --host 127.0.0.1 --port 3004
+Restart=on-failure
+RestartSec=5
+StandardOutput=append:/home/ct/ctm-match/match.log
+StandardError=append:/home/ct/ctm-match/match.log
+
+[Install]
+WantedBy=multi-user.target

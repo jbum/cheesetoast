@@ -1,0 +1,2905 @@
+[
+ {
+  "id": "death-235728-Jev-17.8s",
+  "source": "2026-10-04T23-57-28-mp-duel-jev-heuristic-check6.jsonl.gz @17.8s, Jev died 0.5 s later",
+  "why": "asteroid WheelG hits in 4 ticks, -3 steps off the spout",
+  "mode": "duel",
+  "me": {
+   "heading": 22.5,
+   "vx": 0,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Aster",
+    "x": -327,
+    "y": -57,
+    "vx": 4,
+    "vy": 5,
+    "rad": 16
+   },
+   {
+    "type": "WheelR",
+    "x": -52,
+    "y": 53,
+    "vx": 5,
+    "vy": -4,
+    "rad": 16
+   },
+   {
+    "type": "WheelG",
+    "x": -53,
+    "y": 47,
+    "vx": 4,
+    "vy": -6,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": -59,
+    "y": 44,
+    "vx": 1,
+    "vy": -8,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-235728-Bot-65.0s",
+  "source": "2026-10-04T23-57-28-mp-duel-jev-heuristic-check6.jsonl.gz @65.0s, Bot died 0.5 s later",
+  "why": "rival_shot Bullet hits in 0 ticks, 1 steps off the spout",
+  "mode": "duel",
+  "me": {
+   "heading": 292.5,
+   "vx": 3,
+   "vy": 5,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "AIAster",
+    "x": -374,
+    "y": -12,
+    "vx": 0,
+    "vy": -2,
+    "rad": 20
+   },
+   {
+    "type": "WheelB",
+    "x": 34,
+    "y": 129,
+    "vx": 1,
+    "vy": -4,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [
+   {
+    "x": -20,
+    "y": 18,
+    "vx": 0,
+    "vy": 0
+   }
+  ],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-000920-JevSam-36.5s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @36.5s, Jev Sam died 0.5 s later",
+  "why": "asteroid WheelG hits in 10 ticks, -6 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 180,
+   "vx": 4,
+   "vy": 6,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "WheelG",
+    "x": 84,
+    "y": 82,
+    "vx": -1,
+    "vy": 0,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": -13,
+    "y": 313,
+    "vx": -3,
+    "vy": 2,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": -336,
+    "y": -15,
+    "heading": 45
+   },
+   {
+    "x": 639,
+    "y": -385,
+    "heading": 270
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-000920-JevSam-84.2s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @84.2s, Jev Sam died 0.5 s later",
+  "why": "rival_shot Bullet hits in 9 ticks, 0 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 157.5,
+   "vx": 5,
+   "vy": -1,
+   "shield": 90
+  },
+  "things": [
+   {
+    "type": "SconeRock",
+    "x": 358,
+    "y": -253,
+    "vx": -1,
+    "vy": -4,
+    "rad": 24
+   },
+   {
+    "type": "SconePebble",
+    "x": -412,
+    "y": -178,
+    "vx": -2,
+    "vy": 4,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": -85,
+    "y": -253,
+    "vx": -3,
+    "vy": 2,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": -19,
+    "y": -139,
+    "heading": 0
+   }
+  ],
+  "rivalShots": [
+   {
+    "x": 19,
+    "y": -57,
+    "vx": 4,
+    "vy": 2
+   }
+  ],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-000920-JevTeresa-104.5s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @104.5s, Jev Teresa died 0.5 s later",
+  "why": "asteroid Wheel hits in 10 ticks, 3 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 292.5,
+   "vx": 1,
+   "vy": 6,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Wheel",
+    "x": 2,
+    "y": 149,
+    "vx": -3,
+    "vy": -5,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020411-JevUna-34.6s",
+  "source": "2026-10-05T02-04-11-mp-melee-jev-jev-jev-jev-melee2m-v2.jsonl.gz @34.6s, Jev Una died 0.5 s later",
+  "why": "rival_shot Bullet hits in 10 ticks, -4 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 112.5,
+   "vx": 0,
+   "vy": 5,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Wheel",
+    "x": -378,
+    "y": 72,
+    "vx": -1,
+    "vy": -3,
+    "rad": 16
+   },
+   {
+    "type": "Aster",
+    "x": 234,
+    "y": -120,
+    "vx": -2,
+    "vy": 2,
+    "rad": 16
+   },
+   {
+    "type": "Wheel",
+    "x": 230,
+    "y": 5,
+    "vx": 3,
+    "vy": 1,
+    "rad": 16
+   },
+   {
+    "type": "AIAster",
+    "x": -188,
+    "y": 322,
+    "vx": 3,
+    "vy": -1,
+    "rad": 20
+   },
+   {
+    "type": "Wheel",
+    "x": -315,
+    "y": -204,
+    "vx": 0,
+    "vy": -2,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": 60,
+    "y": 262,
+    "heading": 67.5
+   }
+  ],
+  "rivalShots": [
+   {
+    "x": 56,
+    "y": 142,
+    "vx": -4,
+    "vy": -6
+   },
+   {
+    "x": 110,
+    "y": 233,
+    "vx": 1,
+    "vy": -4
+   }
+  ],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020411-JevWren-35.5s",
+  "source": "2026-10-05T02-04-11-mp-melee-jev-jev-jev-jev-melee2m-v2.jsonl.gz @35.5s, Jev Wren died 0.5 s later",
+  "why": "asteroid AIAster hits in 8 ticks, 6 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 135,
+   "vx": -5,
+   "vy": 1,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Aster",
+    "x": 226,
+    "y": -368,
+    "vx": -2,
+    "vy": 2,
+    "rad": 16
+   },
+   {
+    "type": "Wheel",
+    "x": 318,
+    "y": -272,
+    "vx": 3,
+    "vy": 1,
+    "rad": 16
+   },
+   {
+    "type": "SconeRock",
+    "x": 421,
+    "y": 63,
+    "vx": -1,
+    "vy": 0,
+    "rad": 24
+   },
+   {
+    "type": "AIAster",
+    "x": -104,
+    "y": 12,
+    "vx": 2,
+    "vy": -2,
+    "rad": 20
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020411-JevWren-60.6s",
+  "source": "2026-10-05T02-04-11-mp-melee-jev-jev-jev-jev-melee2m-v2.jsonl.gz @60.6s, Jev Wren died 0.5 s later",
+  "why": "asteroid SconeRock hits in 6 ticks, 2 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 315,
+   "vx": -1,
+   "vy": 5,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "SconeRock",
+    "x": 15,
+    "y": 90,
+    "vx": -2,
+    "vy": -2,
+    "rad": 24
+   },
+   {
+    "type": "AIOpenAI",
+    "x": 48,
+    "y": 121,
+    "vx": 5,
+    "vy": 1,
+    "rad": 18
+   },
+   {
+    "type": "Aster1",
+    "x": -132,
+    "y": 37,
+    "vx": -1,
+    "vy": 3,
+    "rad": 16
+   },
+   {
+    "type": "SmallCup2",
+    "x": 121,
+    "y": -286,
+    "vx": -2,
+    "vy": 3,
+    "rad": 16
+   },
+   {
+    "type": "SmallCup",
+    "x": 244,
+    "y": -236,
+    "vx": 0,
+    "vy": 3,
+    "rad": 16
+   },
+   {
+    "type": "WheelR",
+    "x": 399,
+    "y": 46,
+    "vx": 3,
+    "vy": 2,
+    "rad": 16
+   },
+   {
+    "type": "WheelG",
+    "x": 415,
+    "y": 7,
+    "vx": 4,
+    "vy": 1,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": 415,
+    "y": -35,
+    "vx": 4,
+    "vy": 0,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": 214,
+    "y": 453,
+    "heading": 157.5
+   }
+  ],
+  "rivalShots": [
+   {
+    "x": -45,
+    "y": 364,
+    "vx": -15,
+    "vy": -4
+   },
+   {
+    "x": 22,
+    "y": 392,
+    "vx": -14,
+    "vy": -3
+   },
+   {
+    "x": 88,
+    "y": 419,
+    "vx": -15,
+    "vy": -4
+   }
+  ],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020411-JevUna-85.7s",
+  "source": "2026-10-05T02-04-11-mp-melee-jev-jev-jev-jev-melee2m-v2.jsonl.gz @85.7s, Jev Una died 0.5 s later",
+  "why": "rival_shot Bullet hits in 0 ticks, -1 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 135,
+   "vx": 3,
+   "vy": -7,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Teacup",
+    "x": -243,
+    "y": -58,
+    "vx": 3,
+    "vy": -2,
+    "rad": 24
+   },
+   {
+    "type": "SconePebble",
+    "x": 43,
+    "y": -100,
+    "vx": -2,
+    "vy": 2,
+    "rad": 16
+   },
+   {
+    "type": "SconePebble",
+    "x": -239,
+    "y": -263,
+    "vx": -2,
+    "vy": -2,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": 360,
+    "y": 228,
+    "heading": 270
+   }
+  ],
+  "rivalShots": [
+   {
+    "x": 384,
+    "y": -27,
+    "vx": 1,
+    "vy": -8
+   },
+   {
+    "x": 29,
+    "y": -8,
+    "vx": 0,
+    "vy": 0
+   }
+  ],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020411-JevXavi-110.3s",
+  "source": "2026-10-05T02-04-11-mp-melee-jev-jev-jev-jev-melee2m-v2.jsonl.gz @110.3s, Jev Xavi died 0.5 s later",
+  "why": "rival_shot Bullet hits in 1 ticks, -6 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 202.5,
+   "vx": 4,
+   "vy": -3,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "SconePebble",
+    "x": 341,
+    "y": 232,
+    "vx": 2,
+    "vy": 2,
+    "rad": 16
+   },
+   {
+    "type": "SconePebble",
+    "x": 328,
+    "y": 178,
+    "vx": 2,
+    "vy": -1,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": 97,
+    "y": 11,
+    "heading": 247.5
+   }
+  ],
+  "rivalShots": [
+   {
+    "x": 37,
+    "y": 22,
+    "vx": -13,
+    "vy": 2
+   }
+  ],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020630-JevUna-25.4s",
+  "source": "2026-10-05T02-06-30-mp-coop-jev-jev-jev-jev-coop2m-v2.jsonl.gz @25.4s, Jev Una died 0.5 s later",
+  "why": "asteroid SconePebble hits in 6 ticks, 0 steps off the spout",
+  "mode": "coop",
+  "me": {
+   "heading": 247.5,
+   "vx": -7,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "SconePebble",
+    "x": -58,
+    "y": -38,
+    "vx": -2,
+    "vy": 2,
+    "rad": 16
+   },
+   {
+    "type": "SmallCup",
+    "x": 31,
+    "y": -160,
+    "vx": -1,
+    "vy": -2,
+    "rad": 16
+   },
+   {
+    "type": "SmallCup2",
+    "x": 6,
+    "y": -155,
+    "vx": -3,
+    "vy": -1,
+    "rad": 16
+   },
+   {
+    "type": "SmallCup",
+    "x": 20,
+    "y": -134,
+    "vx": -2,
+    "vy": 0,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "fire": true
+  }
+ },
+ {
+  "id": "death-020630-JevWren-44.9s",
+  "source": "2026-10-05T02-06-30-mp-coop-jev-jev-jev-jev-coop2m-v2.jsonl.gz @44.9s, Jev Wren died 0.5 s later",
+  "why": "asteroid Wheel hits in 6 ticks, -2 steps off the spout",
+  "mode": "coop",
+  "me": {
+   "heading": 22.5,
+   "vx": -5,
+   "vy": 3,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Wheel",
+    "x": -35,
+    "y": 70,
+    "vx": -1,
+    "vy": -2,
+    "rad": 16
+   },
+   {
+    "type": "SconeRock",
+    "x": -190,
+    "y": 394,
+    "vx": -1,
+    "vy": 4,
+    "rad": 24
+   },
+   {
+    "type": "WheelB",
+    "x": -81,
+    "y": -129,
+    "vx": 2,
+    "vy": 2,
+    "rad": 16
+   },
+   {
+    "type": "SmallCup",
+    "x": 183,
+    "y": -406,
+    "vx": -3,
+    "vy": 2,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020630-JevXavi-52.0s",
+  "source": "2026-10-05T02-06-30-mp-coop-jev-jev-jev-jev-coop2m-v2.jsonl.gz @52.0s, Jev Xavi died 0.5 s later",
+  "why": "asteroid WheelR hits in 10 ticks, 4 steps off the spout",
+  "mode": "coop",
+  "me": {
+   "heading": 157.5,
+   "vx": -6,
+   "vy": -5,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "WheelR",
+    "x": -378,
+    "y": -236,
+    "vx": 3,
+    "vy": -6,
+    "rad": 16
+   },
+   {
+    "type": "SmallCup",
+    "x": -398,
+    "y": -79,
+    "vx": -9,
+    "vy": -10,
+    "rad": 16
+   },
+   {
+    "type": "WheelG",
+    "x": 43,
+    "y": -76,
+    "vx": 0,
+    "vy": -2,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": 11,
+    "y": -99,
+    "vx": -3,
+    "vy": -3,
+    "rad": 16
+   },
+   {
+    "type": "WheelR",
+    "x": -101,
+    "y": -62,
+    "vx": 0,
+    "vy": 0,
+    "rad": 16
+   },
+   {
+    "type": "WheelG",
+    "x": -101,
+    "y": -63,
+    "vx": 0,
+    "vy": 0,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": -103,
+    "y": -63,
+    "vx": 0,
+    "vy": 0,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020630-JevVic-62.0s",
+  "source": "2026-10-05T02-06-30-mp-coop-jev-jev-jev-jev-coop2m-v2.jsonl.gz @62.0s, Jev Vic died 0.5 s later",
+  "why": "asteroid SmallCup2 hits in 6 ticks, 4 steps off the spout",
+  "mode": "coop",
+  "me": {
+   "heading": 292.5,
+   "vx": 3,
+   "vy": 5,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "SmallCup2",
+    "x": 43,
+    "y": 69,
+    "vx": 1,
+    "vy": -2,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020630-JevWren-100.6s",
+  "source": "2026-10-05T02-06-30-mp-coop-jev-jev-jev-jev-coop2m-v2.jsonl.gz @100.6s, Jev Wren died 0.5 s later",
+  "why": "asteroid SconePebble hits in 6 ticks, -2 steps off the spout",
+  "mode": "coop",
+  "me": {
+   "heading": 247.5,
+   "vx": 5,
+   "vy": -19,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Wheel",
+    "x": 392,
+    "y": -217,
+    "vx": -13,
+    "vy": 14,
+    "rad": 16
+   },
+   {
+    "type": "SconePebble",
+    "x": -69,
+    "y": -185,
+    "vx": 12,
+    "vy": 8,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020630-JevUna-102.4s",
+  "source": "2026-10-05T02-06-30-mp-coop-jev-jev-jev-jev-coop2m-v2.jsonl.gz @102.4s, Jev Una died 0.5 s later",
+  "why": "asteroid WheelG hits in 6 ticks, 4 steps off the spout",
+  "mode": "coop",
+  "me": {
+   "heading": 67.5,
+   "vx": 3,
+   "vy": -7,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "WheelG",
+    "x": 234,
+    "y": 47,
+    "vx": -4,
+    "vy": -9,
+    "rad": 16
+   },
+   {
+    "type": "WheelR",
+    "x": 88,
+    "y": 207,
+    "vx": 5,
+    "vy": -13,
+    "rad": 16
+   },
+   {
+    "type": "WheelG",
+    "x": -371,
+    "y": -21,
+    "vx": 5,
+    "vy": -8,
+    "rad": 16
+   },
+   {
+    "type": "SmallCup",
+    "x": 423,
+    "y": -9,
+    "vx": 8,
+    "vy": -11,
+    "rad": 16
+   },
+   {
+    "type": "Eugene",
+    "x": 241,
+    "y": -142,
+    "vx": 5,
+    "vy": 14,
+    "rad": 16
+   },
+   {
+    "type": "WheelG",
+    "x": 71,
+    "y": -183,
+    "vx": -17,
+    "vy": 15,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": -386,
+    "y": 9,
+    "vx": -4,
+    "vy": -13,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020630-JevXavi-113.5s",
+  "source": "2026-10-05T02-06-30-mp-coop-jev-jev-jev-jev-coop2m-v2.jsonl.gz @113.5s, Jev Xavi died 0.5 s later",
+  "why": "asteroid WheelG hits in 10 ticks, 3 steps off the spout",
+  "mode": "coop",
+  "me": {
+   "heading": 135,
+   "vx": -4,
+   "vy": -9,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "WheelG",
+    "x": -43,
+    "y": -110,
+    "vx": -1,
+    "vy": -2,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": 169,
+    "y": -157,
+    "vx": 3,
+    "vy": -2,
+    "rad": 16
+   },
+   {
+    "type": "Aster1",
+    "x": -349,
+    "y": 174,
+    "vx": 2,
+    "vy": 1,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020927-JevVic-15.8s",
+  "source": "2026-10-05T02-09-27-mp-coop-jev-jev-jev-jev-coop2m-v3.jsonl.gz @15.8s, Jev Vic died 0.5 s later",
+  "why": "enemy_shot Photon hits in 4 ticks, 4 steps off the spout",
+  "mode": "coop",
+  "me": {
+   "heading": 0,
+   "vx": 10,
+   "vy": -2,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Wheel",
+    "x": 305,
+    "y": 215,
+    "vx": 6,
+    "vy": -2,
+    "rad": 16
+   },
+   {
+    "type": "Aster",
+    "x": 61,
+    "y": 178,
+    "vx": -3,
+    "vy": -2,
+    "rad": 16
+   },
+   {
+    "type": "CoffeePot",
+    "x": 147,
+    "y": -14,
+    "vx": -4,
+    "vy": 1,
+    "rad": 24
+   },
+   {
+    "type": "Photon",
+    "x": 122,
+    "y": 8,
+    "vx": -15,
+    "vy": 1,
+    "rad": 8
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020927-JevXavi-33.6s",
+  "source": "2026-10-05T02-09-27-mp-coop-jev-jev-jev-jev-coop2m-v3.jsonl.gz @33.6s, Jev Xavi died 0.5 s later",
+  "why": "asteroid Wheel hits in 6 ticks, 6 steps off the spout",
+  "mode": "coop",
+  "me": {
+   "heading": 247.5,
+   "vx": 7,
+   "vy": 8,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Wheel",
+    "x": -176,
+    "y": 4,
+    "vx": 8,
+    "vy": -1,
+    "rad": 16
+   },
+   {
+    "type": "AIAster",
+    "x": -277,
+    "y": -302,
+    "vx": -2,
+    "vy": -9,
+    "rad": 20
+   },
+   {
+    "type": "SconeRock",
+    "x": 82,
+    "y": 176,
+    "vx": 4,
+    "vy": 0,
+    "rad": 24
+   },
+   {
+    "type": "Wheel",
+    "x": 47,
+    "y": 111,
+    "vx": 1,
+    "vy": -5,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020927-JevUna-39.5s",
+  "source": "2026-10-05T02-09-27-mp-coop-jev-jev-jev-jev-coop2m-v3.jsonl.gz @39.5s, Jev Una died 0.5 s later",
+  "why": "asteroid BigJim hits in 8 ticks, 6 steps off the spout",
+  "mode": "coop",
+  "me": {
+   "heading": 315,
+   "vx": 6,
+   "vy": 0,
+   "shield": 61
+  },
+  "things": [
+   {
+    "type": "BigJim",
+    "x": 138,
+    "y": 12,
+    "vx": -5,
+    "vy": -6,
+    "rad": 24
+   },
+   {
+    "type": "Aster",
+    "x": -140,
+    "y": -396,
+    "vx": -3,
+    "vy": -7,
+    "rad": 16
+   },
+   {
+    "type": "CoffeePot",
+    "x": -104,
+    "y": 11,
+    "vx": 6,
+    "vy": 1,
+    "rad": 24
+   },
+   {
+    "type": "Photon",
+    "x": -91,
+    "y": 29,
+    "vx": 0,
+    "vy": 0,
+    "rad": 8
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-020927-JevUna-58.6s",
+  "source": "2026-10-05T02-09-27-mp-coop-jev-jev-jev-jev-coop2m-v3.jsonl.gz @58.6s, Jev Una died 0.5 s later",
+  "why": "asteroid Teacup hits in 8 ticks, 0 steps off the spout",
+  "mode": "coop",
+  "me": {
+   "heading": 67.5,
+   "vx": 9,
+   "vy": 4,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Teacup",
+    "x": 88,
+    "y": 25,
+    "vx": 3,
+    "vy": 6,
+    "rad": 24
+   },
+   {
+    "type": "WheelB",
+    "x": 428,
+    "y": -119,
+    "vx": 3,
+    "vy": -2,
+    "rad": 16
+   },
+   {
+    "type": "Photon",
+    "x": -329,
+    "y": -164,
+    "vx": 14,
+    "vy": 8,
+    "rad": 8
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "fire": true
+  }
+ },
+ {
+  "id": "death-020927-JevXavi-75.5s",
+  "source": "2026-10-05T02-09-27-mp-coop-jev-jev-jev-jev-coop2m-v3.jsonl.gz @75.5s, Jev Xavi died 0.5 s later",
+  "why": "asteroid Wheel hits in 6 ticks, 6 steps off the spout",
+  "mode": "coop",
+  "me": {
+   "heading": 157.5,
+   "vx": -19,
+   "vy": 1,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Aster",
+    "x": -116,
+    "y": -241,
+    "vx": -6,
+    "vy": -1,
+    "rad": 16
+   },
+   {
+    "type": "SconeRock",
+    "x": 51,
+    "y": 351,
+    "vx": -3,
+    "vy": -5,
+    "rad": 24
+   },
+   {
+    "type": "Wheel",
+    "x": -159,
+    "y": 68,
+    "vx": 2,
+    "vy": -5,
+    "rad": 16
+   },
+   {
+    "type": "Wheel",
+    "x": 45,
+    "y": 256,
+    "vx": -4,
+    "vy": 5,
+    "rad": 16
+   },
+   {
+    "type": "LittleJim2",
+    "x": 341,
+    "y": -81,
+    "vx": -6,
+    "vy": -5,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-023509-New2-31.5s",
+  "source": "2026-10-05T02-35-09-mp-melee-jev-jev-old-jev-jev-old-h2h1.jsonl.gz @31.5s, New 2 died 0.5 s later",
+  "why": "asteroid WheelB hits in 9 ticks, -3 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 67.5,
+   "vx": 3,
+   "vy": 22,
+   "shield": 74
+  },
+  "things": [
+   {
+    "type": "SmallCup",
+    "x": 170,
+    "y": 313,
+    "vx": -3,
+    "vy": 1,
+    "rad": 16
+   },
+   {
+    "type": "WheelG",
+    "x": 290,
+    "y": 256,
+    "vx": 1,
+    "vy": -3,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": 19,
+    "y": 256,
+    "vx": -1,
+    "vy": -3,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": 0,
+    "y": -866,
+    "heading": 180
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-023509-New1-54.0s",
+  "source": "2026-10-05T02-35-09-mp-melee-jev-jev-old-jev-jev-old-h2h1.jsonl.gz @54.0s, New 1 died 0.5 s later",
+  "why": "asteroid Aster hits in 5 ticks, -6 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 157.5,
+   "vx": 5,
+   "vy": 6,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Aster",
+    "x": 69,
+    "y": 232,
+    "vx": -2,
+    "vy": 0,
+    "rad": 16
+   },
+   {
+    "type": "Aster",
+    "x": 41,
+    "y": 74,
+    "vx": -1,
+    "vy": 0,
+    "rad": 16
+   },
+   {
+    "type": "SmallCup",
+    "x": -87,
+    "y": -279,
+    "vx": -3,
+    "vy": -1,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-023509-New2-56.0s",
+  "source": "2026-10-05T02-35-09-mp-melee-jev-jev-old-jev-jev-old-h2h1.jsonl.gz @56.0s, New 2 died 0.5 s later",
+  "why": "asteroid SconeRock hits in 4 ticks, -3 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 22.5,
+   "vx": -14,
+   "vy": 6,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "SconeRock",
+    "x": -70,
+    "y": 52,
+    "vx": -7,
+    "vy": 0,
+    "rad": 24
+   },
+   {
+    "type": "SconeRock",
+    "x": 111,
+    "y": 180,
+    "vx": -4,
+    "vy": -2,
+    "rad": 24
+   },
+   {
+    "type": "WheelG",
+    "x": -408,
+    "y": -128,
+    "vx": 1,
+    "vy": -6,
+    "rad": 16
+   },
+   {
+    "type": "AIClaude",
+    "x": 408,
+    "y": -145,
+    "vx": -4,
+    "vy": 1,
+    "rad": 18
+   }
+  ],
+  "rivals": [
+   {
+    "x": -25,
+    "y": -765,
+    "heading": 202.5
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-023650-Old4-24.1s",
+  "source": "2026-10-05T02-36-50-mp-melee-jev-old-jev-jev-old-jev-h2h2.jsonl.gz @24.1s, Old 4 died 0.5 s later",
+  "why": "enemy CoffeePot hits in 0 ticks, 0 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 67.5,
+   "vx": 0,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "SconeRock",
+    "x": -219,
+    "y": -145,
+    "vx": 8,
+    "vy": -1,
+    "rad": 24
+   },
+   {
+    "type": "AIAster",
+    "x": 14,
+    "y": -293,
+    "vx": -1,
+    "vy": 9,
+    "rad": 20
+   },
+   {
+    "type": "Wheel",
+    "x": 285,
+    "y": 262,
+    "vx": 12,
+    "vy": 0,
+    "rad": 16
+   },
+   {
+    "type": "AIAster",
+    "x": 80,
+    "y": -49,
+    "vx": -8,
+    "vy": -2,
+    "rad": 20
+   },
+   {
+    "type": "CoffeePot",
+    "x": 28,
+    "y": 15,
+    "vx": -5,
+    "vy": -3,
+    "rad": 24
+   },
+   {
+    "type": "Photon",
+    "x": -6,
+    "y": 17,
+    "vx": -14,
+    "vy": -7,
+    "rad": 8
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-023650-Old4-65.0s",
+  "source": "2026-10-05T02-36-50-mp-melee-jev-old-jev-jev-old-jev-h2h2.jsonl.gz @65.0s, Old 4 died 0.5 s later",
+  "why": "enemy Croissant hits in 9 ticks, 1 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 225,
+   "vx": 0,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Teacup",
+    "x": 133,
+    "y": 418,
+    "vx": 2,
+    "vy": -5,
+    "rad": 24
+   },
+   {
+    "type": "Croissant",
+    "x": -102,
+    "y": -56,
+    "vx": 7,
+    "vy": 4,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": 134,
+    "y": -785,
+    "heading": 270
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-023650-Old3-78.3s",
+  "source": "2026-10-05T02-36-50-mp-melee-jev-old-jev-jev-old-jev-h2h2.jsonl.gz @78.3s, Old 3 died 0.5 s later",
+  "why": "enemy Scone hits in 6 ticks, -1 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 22.5,
+   "vx": 0,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Teacup",
+    "x": -161,
+    "y": 186,
+    "vx": 3,
+    "vy": -9,
+    "rad": 24
+   },
+   {
+    "type": "Scone",
+    "x": 18,
+    "y": 142,
+    "vx": -2,
+    "vy": -16,
+    "rad": 17
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-023650-Old3-90.3s",
+  "source": "2026-10-05T02-36-50-mp-melee-jev-old-jev-jev-old-jev-h2h2.jsonl.gz @90.3s, Old 3 died 0.5 s later",
+  "why": "asteroid SmallCup hits in 7 ticks, 5 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 67.5,
+   "vx": 0,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "SmallCup",
+    "x": -11,
+    "y": -92,
+    "vx": 0,
+    "vy": 8,
+    "rad": 16
+   },
+   {
+    "type": "Aster1",
+    "x": 197,
+    "y": 54,
+    "vx": 7,
+    "vy": -3,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-025346-JevBea-30.9s",
+  "source": "2026-10-05T02-53-46-mp-melee-jev-jev-jev-jev-melee2m-v3.jsonl.gz @30.9s, Jev Bea died 0.5 s later",
+  "why": "rival_shot Bullet hits in 0 ticks, -2 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 247.5,
+   "vx": -5,
+   "vy": -27,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Wheel",
+    "x": 8,
+    "y": -194,
+    "vx": -6,
+    "vy": 6,
+    "rad": 16
+   },
+   {
+    "type": "Wheel",
+    "x": -173,
+    "y": -183,
+    "vx": 11,
+    "vy": -13,
+    "rad": 16
+   },
+   {
+    "type": "WheelG",
+    "x": -245,
+    "y": 162,
+    "vx": -8,
+    "vy": 9,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [
+   {
+    "x": 40,
+    "y": -167,
+    "vx": 0,
+    "vy": 0
+   },
+   {
+    "x": -56,
+    "y": -122,
+    "vx": 0,
+    "vy": 0
+   },
+   {
+    "x": -48,
+    "y": -102,
+    "vx": 0,
+    "vy": -21
+   },
+   {
+    "x": -23,
+    "y": -37,
+    "vx": 14,
+    "vy": 16
+   }
+  ],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-025346-JevYara-73.0s",
+  "source": "2026-10-05T02-53-46-mp-melee-jev-jev-jev-jev-melee2m-v3.jsonl.gz @73.0s, Jev Yara died 0.5 s later",
+  "why": "asteroid SconePebble hits in 10 ticks, 2 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 45,
+   "vx": 7,
+   "vy": 2,
+   "shield": 29
+  },
+  "things": [
+   {
+    "type": "WheelG",
+    "x": 20,
+    "y": -101,
+    "vx": 2,
+    "vy": -1,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": 313,
+    "y": 321,
+    "vx": -4,
+    "vy": -2,
+    "rad": 16
+   },
+   {
+    "type": "CoffeePot",
+    "x": -290,
+    "y": 5,
+    "vx": 0,
+    "vy": 4,
+    "rad": 24
+   },
+   {
+    "type": "SconePebble",
+    "x": 128,
+    "y": 3,
+    "vx": -2,
+    "vy": 0,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": 836,
+    "y": 267,
+    "heading": 315
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-025346-JevZeke-77.3s",
+  "source": "2026-10-05T02-53-46-mp-melee-jev-jev-jev-jev-melee2m-v3.jsonl.gz @77.3s, Jev Zeke died 0.5 s later",
+  "why": "asteroid Aster hits in 10 ticks, 2 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 157.5,
+   "vx": -2,
+   "vy": -8,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Teacup",
+    "x": -287,
+    "y": 314,
+    "vx": -2,
+    "vy": -3,
+    "rad": 24
+   },
+   {
+    "type": "Aster",
+    "x": -50,
+    "y": -137,
+    "vx": 1,
+    "vy": 2,
+    "rad": 16
+   },
+   {
+    "type": "SconeRock",
+    "x": -219,
+    "y": 217,
+    "vx": -1,
+    "vy": -4,
+    "rad": 24
+   },
+   {
+    "type": "SmallCup",
+    "x": 311,
+    "y": 211,
+    "vx": -2,
+    "vy": -4,
+    "rad": 16
+   },
+   {
+    "type": "SconePebble",
+    "x": 62,
+    "y": -104,
+    "vx": -3,
+    "vy": -5,
+    "rad": 16
+   },
+   {
+    "type": "SconePebble",
+    "x": 249,
+    "y": -306,
+    "vx": 0,
+    "vy": 2,
+    "rad": 16
+   },
+   {
+    "type": "WheelR",
+    "x": -336,
+    "y": 152,
+    "vx": -1,
+    "vy": 5,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-025346-JevYara-86.9s",
+  "source": "2026-10-05T02-53-46-mp-melee-jev-jev-jev-jev-melee2m-v3.jsonl.gz @86.9s, Jev Yara died 0.5 s later",
+  "why": "asteroid SconePebble hits in 9 ticks, 7 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 90,
+   "vx": -7,
+   "vy": -5,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "SmallCup2",
+    "x": 197,
+    "y": 332,
+    "vx": -1,
+    "vy": 2,
+    "rad": 16
+   },
+   {
+    "type": "SconePebble",
+    "x": -87,
+    "y": -45,
+    "vx": -1,
+    "vy": -2,
+    "rad": 16
+   },
+   {
+    "type": "SconePebble",
+    "x": -67,
+    "y": -359,
+    "vx": 3,
+    "vy": 2,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": -421,
+    "y": -32,
+    "heading": 337.5
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-025923-Soft1-9.9s",
+  "source": "2026-10-05T02-59-23-mp-melee-jev-jev-old-jev-jev-old-soft1.jsonl.gz @9.9s, Soft 1 died 0.5 s later",
+  "why": "enemy_shot Photon hits in 6 ticks, 0 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 0,
+   "vx": 0,
+   "vy": 0,
+   "shield": 89
+  },
+  "things": [
+   {
+    "type": "Photon",
+    "x": -5,
+    "y": 122,
+    "vx": 1,
+    "vy": -16,
+    "rad": 8
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-025923-Old1-17.0s",
+  "source": "2026-10-05T02-59-23-mp-melee-jev-jev-old-jev-jev-old-soft1.jsonl.gz @17.0s, Old 1 died 0.5 s later",
+  "why": "asteroid WheelR hits in 0 ticks, 8 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 292.5,
+   "vx": 0,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Teacup",
+    "x": 320,
+    "y": 181,
+    "vx": -2,
+    "vy": -1,
+    "rad": 24
+   },
+   {
+    "type": "WheelR",
+    "x": 23,
+    "y": -8,
+    "vx": -2,
+    "vy": -4,
+    "rad": 16
+   },
+   {
+    "type": "WheelG",
+    "x": 24,
+    "y": 13,
+    "vx": -2,
+    "vy": -1,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": 20,
+    "y": 19,
+    "vx": -2,
+    "vy": -1,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-025923-Soft1-37.3s",
+  "source": "2026-10-05T02-59-23-mp-melee-jev-jev-old-jev-jev-old-soft1.jsonl.gz @37.3s, Soft 1 died 0.5 s later",
+  "why": "enemy Croissant hits in 4 ticks, -4 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 292.5,
+   "vx": 0,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Croissant",
+    "x": -28,
+    "y": -114,
+    "vx": 4,
+    "vy": 16,
+    "rad": 24
+   },
+   {
+    "type": "WheelG",
+    "x": -144,
+    "y": 133,
+    "vx": -7,
+    "vy": -3,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": -127,
+    "y": 171,
+    "vx": -6,
+    "vy": 0,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-025923-Old1-85.3s",
+  "source": "2026-10-05T02-59-23-mp-melee-jev-jev-old-jev-jev-old-soft1.jsonl.gz @85.3s, Old 1 died 0.5 s later",
+  "why": "enemy Croissant hits in 8 ticks, 3 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 315,
+   "vx": 0,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Wheel",
+    "x": 269,
+    "y": 2,
+    "vx": 2,
+    "vy": -4,
+    "rad": 16
+   },
+   {
+    "type": "Croissant",
+    "x": 45,
+    "y": 93,
+    "vx": -4,
+    "vy": -7,
+    "rad": 15
+   },
+   {
+    "type": "WheelG",
+    "x": -267,
+    "y": -229,
+    "vx": -1,
+    "vy": -3,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-025923-Old2-117.8s",
+  "source": "2026-10-05T02-59-23-mp-melee-jev-jev-old-jev-jev-old-soft1.jsonl.gz @117.8s, Old 2 died 0.5 s later",
+  "why": "asteroid WheelG hits in 7 ticks, -4 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 0,
+   "vx": 0,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "WheelG",
+    "x": -61,
+    "y": 6,
+    "vx": 3,
+    "vy": 1,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "death-030133-Old3-27.4s",
+  "source": "2026-10-05T03-01-33-mp-melee-jev-old-jev-jev-old-jev-soft2.jsonl.gz @27.4s, Old 3 died 0.5 s later",
+  "why": "enemy Scone hits in 9 ticks, 5 steps off the spout",
+  "mode": "melee",
+  "me": {
+   "heading": 67.5,
+   "vx": 0,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "SconeRock",
+    "x": -242,
+    "y": 208,
+    "vx": 4,
+    "vy": -2,
+    "rad": 24
+   },
+   {
+    "type": "Aster",
+    "x": 419,
+    "y": 7,
+    "vx": -3,
+    "vy": -1,
+    "rad": 16
+   },
+   {
+    "type": "Scone",
+    "x": -21,
+    "y": -109,
+    "vx": 1,
+    "vy": 7,
+    "rad": 20
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": true
+  }
+ },
+ {
+  "id": "calm-235728-Bot-22.6s",
+  "source": "2026-10-04T23-57-28-mp-duel-jev-heuristic-check6.jsonl.gz @22.6s, Bot",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "duel",
+  "me": {
+   "heading": 112.5,
+   "vx": 1,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-235728-Bot-36.5s",
+  "source": "2026-10-04T23-57-28-mp-duel-jev-heuristic-check6.jsonl.gz @36.5s, Bot",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "duel",
+  "me": {
+   "heading": 22.5,
+   "vx": 2,
+   "vy": 3,
+   "shield": 100
+  },
+  "things": [],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-235728-Bot-49.9s",
+  "source": "2026-10-04T23-57-28-mp-duel-jev-heuristic-check6.jsonl.gz @49.9s, Bot",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "duel",
+  "me": {
+   "heading": 202.5,
+   "vx": 4,
+   "vy": 5,
+   "shield": 100
+  },
+  "things": [],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-235728-Bot-77.7s",
+  "source": "2026-10-04T23-57-28-mp-duel-jev-heuristic-check6.jsonl.gz @77.7s, Bot",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "duel",
+  "me": {
+   "heading": 270,
+   "vx": -1,
+   "vy": 4,
+   "shield": 100
+  },
+  "things": [],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-235728-Bot-116.1s",
+  "source": "2026-10-04T23-57-28-mp-duel-jev-heuristic-check6.jsonl.gz @116.1s, Bot",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "duel",
+  "me": {
+   "heading": 90,
+   "vx": -14,
+   "vy": 10,
+   "shield": 80
+  },
+  "things": [],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevQuentin-20.4s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @20.4s, Jev Quentin",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 270,
+   "vx": -10,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Wheel",
+    "x": -46,
+    "y": -429,
+    "vx": 4,
+    "vy": -6,
+    "rad": 16
+   },
+   {
+    "type": "Wheel",
+    "x": -383,
+    "y": 81,
+    "vx": -6,
+    "vy": 1,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevQuentin-33.8s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @33.8s, Jev Quentin",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 45,
+   "vx": -5,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "WheelG",
+    "x": 296,
+    "y": 98,
+    "vx": -2,
+    "vy": 0,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": 221,
+    "y": 277,
+    "vx": -3,
+    "vy": 2,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": -18,
+    "y": -200,
+    "heading": 270
+   }
+  ],
+  "rivalShots": [
+   {
+    "x": -174,
+    "y": -185,
+    "vx": -5,
+    "vy": 6
+   },
+   {
+    "x": -102,
+    "y": -185,
+    "vx": -5,
+    "vy": 6
+   }
+  ],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevRose-33.8s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @33.8s, Jev Rose",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 90,
+   "vx": -3,
+   "vy": 4,
+   "shield": 100
+  },
+  "things": [],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevSam-33.8s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @33.8s, Jev Sam",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 270,
+   "vx": 4,
+   "vy": 6,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Wheel",
+    "x": -389,
+    "y": -154,
+    "vx": -3,
+    "vy": -5,
+    "rad": 16
+   },
+   {
+    "type": "WheelG",
+    "x": 314,
+    "y": 298,
+    "vx": -2,
+    "vy": 0,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": 18,
+    "y": 200,
+    "heading": 45
+   }
+  ],
+  "rivalShots": [
+   {
+    "x": 267,
+    "y": 209,
+    "vx": 3,
+    "vy": 0
+   },
+   {
+    "x": 195,
+    "y": 209,
+    "vx": 3,
+    "vy": 0
+   }
+  ],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevTeresa-33.8s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @33.8s, Jev Teresa",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 270,
+   "vx": 1,
+   "vy": 6,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Wheel",
+    "x": -264,
+    "y": -151,
+    "vx": 2,
+    "vy": -3,
+    "rad": 16
+   },
+   {
+    "type": "SconePebble",
+    "x": -206,
+    "y": 398,
+    "vx": 0,
+    "vy": -2,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevRose-47.3s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @47.3s, Jev Rose",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 135,
+   "vx": -4,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevSam-47.3s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @47.3s, Jev Sam",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 270,
+   "vx": 5,
+   "vy": 0,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "AIClaude",
+    "x": 176,
+    "y": -68,
+    "vx": 3,
+    "vy": -2,
+    "rad": 18
+   },
+   {
+    "type": "SconePebble",
+    "x": -78,
+    "y": -215,
+    "vx": 0,
+    "vy": -2,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": 602,
+    "y": -564,
+    "heading": 67.5
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevQuentin-60.4s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @60.4s, Jev Quentin",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 270,
+   "vx": 1,
+   "vy": -5,
+   "shield": 100
+  },
+  "things": [],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevSam-60.4s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @60.4s, Jev Sam",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 337.5,
+   "vx": 5,
+   "vy": 0,
+   "shield": 82
+  },
+  "things": [
+   {
+    "type": "CoffeePot",
+    "x": -288,
+    "y": 36,
+    "vx": 4,
+    "vy": 0,
+    "rad": 24
+   },
+   {
+    "type": "Photon",
+    "x": -395,
+    "y": -180,
+    "vx": 5,
+    "vy": -6,
+    "rad": 8
+   },
+   {
+    "type": "Photon",
+    "x": -280,
+    "y": 55,
+    "vx": 0,
+    "vy": 0,
+    "rad": 8
+   }
+  ],
+  "rivals": [
+   {
+    "x": -558,
+    "y": -276,
+    "heading": 135
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevTeresa-60.4s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @60.4s, Jev Teresa",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 292.5,
+   "vx": 2,
+   "vy": 5,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "WheelB",
+    "x": -130,
+    "y": -389,
+    "vx": -2,
+    "vy": 2,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": -222,
+    "y": 653,
+    "heading": 135
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevQuentin-73.3s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @73.3s, Jev Quentin",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 337.5,
+   "vx": 1,
+   "vy": -5,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "SconeRock",
+    "x": 410,
+    "y": -173,
+    "vx": 1,
+    "vy": -3,
+    "rad": 24
+   },
+   {
+    "type": "SconePebble",
+    "x": 128,
+    "y": 163,
+    "vx": -2,
+    "vy": 3,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevRose-73.3s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @73.3s, Jev Rose",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 337.5,
+   "vx": -7,
+   "vy": 2,
+   "shield": 100
+  },
+  "things": [],
+  "rivals": [
+   {
+    "x": -27,
+    "y": -163,
+    "heading": 157.5
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevSam-73.3s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @73.3s, Jev Sam",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 157.5,
+   "vx": 5,
+   "vy": -1,
+   "shield": 86
+  },
+  "things": [],
+  "rivals": [
+   {
+    "x": 27,
+    "y": 163,
+    "heading": 337.5
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevTeresa-73.3s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @73.3s, Jev Teresa",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 337.5,
+   "vx": 1,
+   "vy": 6,
+   "shield": 91
+  },
+  "things": [
+   {
+    "type": "Photon",
+    "x": -84,
+    "y": -406,
+    "vx": 2,
+    "vy": 8,
+    "rad": 8
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevQuentin-86.8s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @86.8s, Jev Quentin",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 292.5,
+   "vx": 1,
+   "vy": -10,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "SconeRock",
+    "x": 282,
+    "y": -86,
+    "vx": -1,
+    "vy": -9,
+    "rad": 24
+   },
+   {
+    "type": "WheelB",
+    "x": -273,
+    "y": 309,
+    "vx": -5,
+    "vy": 4,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevRose-86.8s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @86.8s, Jev Rose",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 135,
+   "vx": -13,
+   "vy": 4,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Aster",
+    "x": 112,
+    "y": -292,
+    "vx": 8,
+    "vy": 3,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": 571,
+    "y": -422,
+    "heading": 45
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevTeresa-86.8s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @86.8s, Jev Teresa",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 45,
+   "vx": 1,
+   "vy": 12,
+   "shield": 95
+  },
+  "things": [
+   {
+    "type": "Photon",
+    "x": -34,
+    "y": -413,
+    "vx": 1,
+    "vy": 16,
+    "rad": 8
+   }
+  ],
+  "rivals": [
+   {
+    "x": -571,
+    "y": 422,
+    "heading": 135
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevQuentin-99.8s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @99.8s, Jev Quentin",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 247.5,
+   "vx": 1,
+   "vy": -5,
+   "shield": 100
+  },
+  "things": [],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevTeresa-99.8s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @99.8s, Jev Teresa",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 90,
+   "vx": 0,
+   "vy": 5,
+   "shield": 99
+  },
+  "things": [],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-000920-JevQuentin-126.8s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @126.8s, Jev Quentin",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "melee",
+  "me": {
+   "heading": 112.5,
+   "vx": 9,
+   "vy": -1,
+   "shield": 100
+  },
+  "things": [],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-012531-Bot1-15.2s",
+  "source": "2026-10-05T01-25-31-mp-coop-heuristic-heuristic-heuristic-diff.jsonl.gz @15.2s, Bot 1",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "coop",
+  "me": {
+   "heading": 135,
+   "vx": 1,
+   "vy": 5,
+   "shield": 100
+  },
+  "things": [],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-012531-Bot1-25.2s",
+  "source": "2026-10-05T01-25-31-mp-coop-heuristic-heuristic-heuristic-diff.jsonl.gz @25.2s, Bot 1",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "coop",
+  "me": {
+   "heading": 225,
+   "vx": 0,
+   "vy": 5,
+   "shield": 90
+  },
+  "things": [
+   {
+    "type": "Aster",
+    "x": -306,
+    "y": -222,
+    "vx": -2,
+    "vy": -2,
+    "rad": 16
+   },
+   {
+    "type": "CoffeePot",
+    "x": -41,
+    "y": -387,
+    "vx": 0,
+    "vy": 3,
+    "rad": 24
+   },
+   {
+    "type": "SconePebble",
+    "x": -191,
+    "y": -313,
+    "vx": -1,
+    "vy": -3,
+    "rad": 16
+   },
+   {
+    "type": "SconePebble",
+    "x": -241,
+    "y": -263,
+    "vx": -3,
+    "vy": -1,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "calm-012531-Bot2-25.2s",
+  "source": "2026-10-05T01-25-31-mp-coop-heuristic-heuristic-heuristic-diff.jsonl.gz @25.2s, Bot 2",
+  "why": "nothing harmful within 25 ticks",
+  "mode": "coop",
+  "me": {
+   "heading": 0,
+   "vx": 3,
+   "vy": 4,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Wheel",
+    "x": -61,
+    "y": 228,
+    "vx": -3,
+    "vy": -1,
+    "rad": 16
+   },
+   {
+    "type": "Aster",
+    "x": -257,
+    "y": -86,
+    "vx": -2,
+    "vy": 1,
+    "rad": 16
+   },
+   {
+    "type": "Teacup",
+    "x": 9,
+    "y": -212,
+    "vx": 0,
+    "vy": 2,
+    "rad": 24
+   },
+   {
+    "type": "SmallCup",
+    "x": -253,
+    "y": -57,
+    "vx": 0,
+    "vy": -3,
+    "rad": 16
+   }
+  ],
+  "rivals": [],
+  "rivalShots": [],
+  "expect": {
+   "shield": false
+  }
+ },
+ {
+  "id": "hit-000920-JevTeresa-46.9s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @46.9s, Jev Teresa hit a rival 0.4 s later",
+  "why": "rival 1 steps off the spout, gap 75",
+  "mode": "melee",
+  "me": {
+   "heading": 45,
+   "vx": 2,
+   "vy": 5,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "Wheel",
+    "x": 252,
+    "y": 348,
+    "vx": -3,
+    "vy": -5,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": 111,
+    "y": 52,
+    "heading": 225
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "fire": true
+  }
+ },
+ {
+  "id": "hit-000920-JevQuentin-84.2s",
+  "source": "2026-10-05T00-09-20-mp-melee-jev-jev-jev-jev-melee2m.jsonl.gz @84.2s, Jev Quentin hit a rival 0.4 s later",
+  "why": "rival 0 steps off the spout, gap 102",
+  "mode": "melee",
+  "me": {
+   "heading": 0,
+   "vx": 1,
+   "vy": -5,
+   "shield": 100
+  },
+  "things": [
+   {
+    "type": "SconeRock",
+    "x": 374,
+    "y": -113,
+    "vx": 0,
+    "vy": -4,
+    "rad": 24
+   },
+   {
+    "type": "SconePebble",
+    "x": -399,
+    "y": -22,
+    "vx": -2,
+    "vy": 4,
+    "rad": 16
+   },
+   {
+    "type": "WheelB",
+    "x": -73,
+    "y": -101,
+    "vx": -3,
+    "vy": 1,
+    "rad": 16
+   }
+  ],
+  "rivals": [
+   {
+    "x": 27,
+    "y": 148,
+    "heading": 157.5
+   }
+  ],
+  "rivalShots": [],
+  "expect": {
+   "fire": true
+  }
+ }
+]

@@ -1,0 +1,444 @@
+:root {
+  --ink: rgba(255, 255, 255, 0.85);
+  --ink-dim: rgba(255, 255, 255, 0.45);
+  --glass: rgba(120, 120, 255, 0.10);
+  --glass-down: rgba(160, 255, 255, 0.35);
+  --accent: #ff80ff;
+  --btn-scale: 1;   /* settings: button size */
+  --btn: calc(clamp(60px, 11vmin, 96px) * var(--btn-scale));
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  color: var(--ink);
+  font-family: "Comic Neue", "Chalkboard SE", "Chalkboard", "Comic Sans MS", sans-serif;
+  font-weight: 700;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+body { position: fixed; inset: 0; }
+
+#game {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hidden { display: none !important; }
+
+/* ---- multiplayer: mode picker (attract) and status line (play) ---- */
+#mp-bar {
+  position: absolute;
+  left: 50%;
+  top: calc(10px + var(--safe-top));   /* top center: the beastiary fills the bottom */
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+  color: #a0e0e0;
+  font-size: 16px;
+  white-space: nowrap;
+}
+.mp-mode {
+  padding: 6px 14px;
+  border: 1px solid rgba(160, 255, 255, 0.35);
+  border-radius: 16px;
+  background: rgba(0, 30, 45, 0.55);
+  color: #a0d8e0;
+  font: inherit;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.mp-mode.on { background: rgba(0, 90, 120, 0.8); border-color: #a0ffff; color: #fff; }
+#mp-waiting { color: #8fb7bd; font-size: 14px; min-width: 9em; }
+/* (narrow screens: the Games list says who's playing; the top line must fit) */
+@media (max-width: 900px) { #mp-waiting { display: none; } }
+#mp-status {
+  position: absolute;
+  top: calc(8px + var(--safe-top));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  padding: 4px 12px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.35);
+  color: #a0e8f0;
+  font-size: 14px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+a.mp-link { text-decoration: none; }
+.mp-gear { width: 34px; height: 32px; padding: 5px; display: inline-flex; align-items: center; justify-content: center; }
+.mp-gear svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ---- settings (gear) ---- */
+#settings { background: rgba(0, 0, 0, 0.55); z-index: 25; }
+.settings-box {
+  width: min(420px, 92vw);
+  max-height: calc(100% - 24px);
+  overflow-y: auto;
+  padding: 18px 22px 12px;
+  border: 1px solid rgba(160, 255, 255, 0.45);
+  border-radius: 16px;
+  background: rgba(5, 20, 30, 0.94);
+  color: #c0f0f4;
+  touch-action: auto;
+}
+.settings-box h2 { margin: 0 0 12px; font-size: 26px; font-weight: normal; color: #a0ffff; text-align: center; }
+.set-group { margin: 0 0 12px; padding: 8px 12px; border: 1px solid rgba(160, 255, 255, 0.15); border-radius: 10px; }
+.set-head { font-size: 13px; color: #8fb7bd; margin-bottom: 4px; letter-spacing: 0.04em; }
+.set-dim { color: #6f9399; font-size: 12px; }
+.set-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 40px; font-size: 18px; cursor: pointer; }
+.set-row input[type=range] { flex: 1; max-width: 220px; accent-color: #a0ffff; }
+.set-note { font-size: 13px; color: #a0c8cc; margin: 2px 0 6px; min-height: 0; }
+.set-note:empty { display: none; }
+#set-away-note { text-align: center; color: #ffd890; }
+.set-btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.set-btns .pill { display: inline-block; margin: 8px 0 6px; min-width: 150px; font-size: 18px; padding: 10px 18px; }
+/* 2 / 3 / 4 */
+.seg { display: inline-flex; border: 1px solid rgba(160, 255, 255, 0.35); border-radius: 14px; overflow: hidden; flex: none; }
+.seg button { font: inherit; font-size: 16px; color: #a0d8e0; background: rgba(0, 30, 45, 0.55); border: 0; padding: 4px 14px; cursor: pointer; }
+.seg button + button { border-left: 1px solid rgba(160, 255, 255, 0.25); }
+.seg button.on { background: rgba(0, 120, 150, 0.9); color: #fff; }
+.mute-row { min-height: 34px; font-size: 16px; padding-left: 12px; }
+.set-help summary { cursor: pointer; padding: 2px 0; }
+.set-help[open] summary { margin-bottom: 6px; }
+table.keys { width: 100%; border-collapse: collapse; font-size: 15px; }
+table.keys td { padding: 3px 0; border-bottom: 1px solid rgba(160, 255, 255, 0.08); }
+table.keys td + td { text-align: right; color: #e6fbff; }
+/* on/off switch */
+.switch { appearance: none; -webkit-appearance: none; width: 46px; height: 26px; border-radius: 13px; margin: 0;
+  background: rgba(255, 255, 255, 0.18); position: relative; cursor: pointer; transition: background 120ms; flex: none; }
+.switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%;
+  background: #dfe; transition: left 120ms; }
+.switch:checked { background: rgba(0, 150, 170, 0.9); }
+.switch:checked::after { left: 23px; }
+.switch:focus-visible, .set-row input[type=range]:focus-visible { outline: 2px solid #a0ffff; outline-offset: 2px; }
+
+.mp-name { margin-left: 6px; max-width: 10em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#name-dlg {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+.name-box {
+  width: min(360px, 86vw);
+  padding: 20px 22px 16px;
+  border: 1px solid rgba(160, 255, 255, 0.45);
+  border-radius: 16px;
+  background: rgba(5, 20, 30, 0.92);
+  color: #c8eef2;
+  font: 700 18px "Comic Neue", "Chalkboard SE", "Chalkboard", "Comic Sans MS", sans-serif;
+  text-align: center;
+}
+#name-input {
+  width: 100%;
+  margin: 14px 0 6px;
+  padding: 8px 14px;
+  box-sizing: border-box;
+  border: 1px solid rgba(160, 255, 255, 0.6);
+  border-radius: 18px;
+  background: rgba(0, 10, 18, 0.9);
+  color: #fff;
+  font: 700 18px "Comic Neue", "Chalkboard SE", "Chalkboard", "Comic Sans MS", sans-serif;   /* 16px+ keeps iOS from zooming */
+  text-align: center;
+  outline: none;
+}
+#name-msg { min-height: 1.3em; font-size: 14px; color: #ffb0d0; }
+.name-btns { display: flex; justify-content: center; gap: 10px; margin-top: 8px; }
+#chat {
+  position: absolute;
+  left: 50%;
+  bottom: calc(64px + var(--safe-bottom));
+  transform: translateX(-50%);
+  z-index: 16;
+  width: min(520px, 80vw);
+}
+#chat-input {
+  width: 100%;
+  padding: 8px 14px;
+  border: 1px solid rgba(160, 255, 255, 0.6);
+  border-radius: 18px;
+  background: rgba(5, 20, 30, 0.85);
+  color: #e8fbff;
+  font: 700 16px "Comic Neue", "Chalkboard SE", "Chalkboard", "Comic Sans MS", sans-serif;
+  outline: none;
+}
+
+/* ---- full screen / sound / pause buttons, bottom right ---- */
+
+#hud {
+  position: absolute;
+  right: calc(10px + var(--safe-right));
+  bottom: calc(10px + var(--safe-bottom));
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+/* while the touch controls show they own both bottom corners: sit bottom center */
+body.touch-controls #hud {
+  right: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(14px + var(--safe-bottom));
+}
+
+.hud-btn {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--ink-dim);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.hud-btn:hover { color: var(--ink); border-color: rgba(255, 255, 255, 0.4); }
+.hud-btn svg { width: 100%; height: 100%; display: block; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.hud-btn svg .fill { fill: currentColor; }
+
+#btn-fullscreen .icon-exit { display: none; }
+body.fullscreen #btn-fullscreen .icon-enter { display: none; }
+body.fullscreen #btn-fullscreen .icon-exit { display: block; }
+#btn-sound .icon-off { display: none; }
+body.muted #btn-sound .icon-on { display: none; }
+body.muted #btn-sound .icon-off { display: block; }
+
+/* ---- touch controls ---- */
+/* settings: left-handed puts fire, thrust and shield on the left */
+body.lefty #tc-left { left: auto; right: calc(14px + var(--safe-right)); }
+body.lefty #tc-right { right: auto; left: calc(14px + var(--safe-left)); }
+/* ...mirrored, so fire is under the thumb at the outer edge */
+body.lefty .tc-fire { right: auto; left: 0; }
+body.lefty .tc-thrust { left: auto; right: 0; }
+body.lefty .tc-shield { right: auto; left: calc(var(--btn) * 0.15); }
+
+#touch { position: absolute; inset: 0; pointer-events: none; z-index: 5; }
+#touch.hidden { display: none; }
+
+.tc-cluster {
+  position: absolute;
+  bottom: calc(14px + var(--safe-bottom));
+  pointer-events: auto;
+  touch-action: none;
+}
+#tc-left {
+  left: calc(14px + var(--safe-left));
+  width: calc(var(--btn) * 2.1);
+  height: calc(var(--btn) * 2.1);
+}
+/* the steering circle: the thumb's direction from the center is where the
+   teapot turns to face; the inner half is the brake (double-tap) */
+.tc-stick {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  background: var(--glass);
+}
+.tc-stick-brake {
+  position: absolute; left: 25%; top: 25%; width: 50%; height: 50%;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.22);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-dim); font-size: calc(var(--btn) * 0.15); letter-spacing: 0.04em;
+  transition: background 60ms;
+}
+.tc-stick.braking .tc-stick-brake { background: var(--glass-down); color: #fff; border-style: solid; }
+.tc-stick-knob {
+  position: absolute; left: 50%; top: 50%;
+  width: calc(var(--btn) * 0.55); height: calc(var(--btn) * 0.55);
+  margin: calc(var(--btn) * -0.275) 0 0 calc(var(--btn) * -0.275);
+  border-radius: 50%;
+  background: rgba(160, 255, 255, 0.35);
+  border: 2px solid rgba(200, 255, 255, 0.6);
+  opacity: 0; transition: opacity 80ms;
+  pointer-events: none;
+}
+.tc-stick.steering .tc-stick-knob { opacity: 1; }
+/* a notch on the rim at the heading the teapot is turning to */
+.tc-stick-aim {
+  position: absolute; left: 50%; top: 0; width: 0; height: 50%;
+  transform-origin: 50% 100%;
+  pointer-events: none; opacity: 0;
+}
+.tc-stick-aim::before {
+  content: ''; position: absolute; left: calc(var(--btn) * -0.12); top: calc(var(--btn) * 0.04);
+  border-left: calc(var(--btn) * 0.12) solid transparent; border-right: calc(var(--btn) * 0.12) solid transparent;
+  border-top: calc(var(--btn) * 0.18) solid rgba(160, 255, 255, 0.8);
+  transform: rotate(180deg);
+}
+.tc-stick.aiming .tc-stick-aim { opacity: 1; }
+#tc-right {
+  right: calc(14px + var(--safe-right));
+  width: calc(var(--btn) * 2.45);
+  height: calc(var(--btn) * 2.2);
+}
+
+.tc-btn {
+  position: absolute;
+  width: var(--btn);
+  height: var(--btn);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  background: var(--glass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-dim);
+  font-size: calc(var(--btn) * 0.2);
+  letter-spacing: 0.04em;
+  transition: background 60ms, transform 60ms;
+}
+.tc-btn svg { width: 46%; height: 46%; fill: currentColor; }
+.tc-btn.down { background: var(--glass-down); color: #fff; transform: scale(0.94); }
+
+
+.tc-fire {
+  right: 0;
+  bottom: 0;
+  width: calc(var(--btn) * 1.15);
+  height: calc(var(--btn) * 1.15);
+  border-color: rgba(255, 200, 120, 0.45);
+}
+.tc-thrust { left: 0; bottom: 0; }
+.tc-shield {
+  right: calc(var(--btn) * 0.15);
+  top: 0;
+  width: calc(var(--btn) * 0.85);
+  height: calc(var(--btn) * 0.85);
+  border-color: rgba(160, 200, 255, 0.45);
+}
+
+/* ---- overlays ---- */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+#start { cursor: default; }
+#paused { background: rgba(0, 0, 0, 0.45); }
+
+.panel { text-align: center; padding: 24px; }
+.panel h1 {
+  margin: 0 0 18px;
+  font-size: clamp(36px, 9vmin, 72px);
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #ffb0d0;
+  text-shadow: 4px 4px 0 #2e2e2e;
+}
+.panel h2 { margin: 0 0 22px; font-size: 32px; font-weight: normal; color: #a0ffff; }
+.panel p { margin: 0 0 14px; font-size: 20px; color: #a0e0e0; }
+
+.bar { width: 200px; height: 4px; margin: 0 auto; background: rgba(255, 255, 255, 0.15); border-radius: 2px; overflow: hidden; }
+#start-bar { width: 0; height: 100%; background: #a0ffff; transition: width 120ms; }
+.ready .bar { visibility: hidden; }
+/* placeholder only: the canvas draws the title here, flying in once loaded */
+#start h1 { visibility: hidden; margin-bottom: 34px; }
+
+.pill {
+  display: block;
+  margin: 10px auto;
+  min-width: 170px;
+  padding: 12px 22px;
+  border: 1px solid rgba(160, 255, 255, 0.5);
+  border-radius: 24px;
+  background: rgba(0, 40, 60, 0.6);
+  color: #c0ffff;
+  font: inherit;
+  font-size: 20px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.pill:hover { background: rgba(0, 70, 100, 0.7); }
+.pill-dim { border-color: rgba(255, 255, 255, 0.25); color: var(--ink-dim); background: rgba(0, 0, 0, 0.4); }
+
+/* The name is drawn on the canvas in the game's own lettering; this field
+   just collects the typing (and brings up the keyboard on touch devices). */
+#engrave { position: absolute; z-index: 15; }
+#engrave-name {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  font-size: 16px;   /* keeps iOS from zooming in on focus */
+  -webkit-user-select: text;
+  user-select: text;
+}
+#engrave-done {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%);
+  margin-top: 16px;
+  transition: opacity 150ms, border-color 150ms;
+}
+#engrave-done:disabled {
+  opacity: 0.35;
+  cursor: default;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.35);
+}
+#engrave-name { cursor: text; border-radius: 999px; }
+
+/* Phones and tablets held upright: the game needs landscape, and browsers
+   can't force it (no orientation lock on iOS), so cover the game and ask. */
+#rotate { display: none; z-index: 30; background: #000; }
+@media (orientation: portrait) and (pointer: coarse) {
+  #rotate { display: flex; }
+}
+#rotate p { font-size: 22px; text-wrap: balance; max-width: 18em; }
+.rotate-phone {
+  width: 96px; height: 96px; margin-bottom: 12px;
+  fill: none; stroke: #a0ffff; stroke-width: 2.5; stroke-linecap: round;
+  animation: rotate-phone 2.4s ease-in-out infinite;
+}
+@keyframes rotate-phone {
+  0%, 20% { transform: rotate(0deg); }
+  50%, 80% { transform: rotate(-90deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* "Play full screen" help (iPhone: Add to Home Screen) */
+#fs-help { background: rgba(0, 0, 0, 0.95); z-index: 25; }
+#fs-help .panel { max-width: 30em; text-align: left; }
+#fs-help h2 { text-align: center; }
+#fs-help p, #fs-help li { font-size: 17px; color: #c8eef2; line-height: 1.4; }
+#fs-help ol { margin: 0 0 16px; padding-left: 1.4em; }
+#fs-help li { margin-bottom: 6px; }
+#fs-help b { color: #fff; }
+#fs-help .panel { max-height: 100%; overflow-y: auto; padding: 16px 24px; box-sizing: border-box; }
+#fs-help h2 { margin-bottom: 10px; }

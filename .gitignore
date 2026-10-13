@@ -1,0 +1,31 @@
+# OS / editor clutter
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+
+# Local tooling output (headless browser checks, logs)
+.playwright-cli/
+*.log
+node_modules/
+
+# Private working notes: they contain local paths, hostnames and LAN addresses
+CLAUDE.md
+CLAUDE.local.md
+.claude/
+
+# bot runs and rendered videos
+bots/logs/
+bots/videos/
+
+# daily log review extracts (tools/log-review.sh)
+.logreview/
+
+# the TURN relay's shared secret lives only on the server
+server/turn.secret

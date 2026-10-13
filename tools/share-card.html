@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Cheese Toast share card</title>
+<!--
+  Draws the 1200x630 social media card (assets/share.jpg) from the game's own
+  sprites and bitmap fonts.  Open through the dev server:
+      http://localhost:8080/tools/share-card.html
+  then save the canvas (right click), or let a headless browser read
+  window.cardPNG (a data: URL) once window.cardReady is true.  The site uses
+  a JPEG of it (quality 88, ~100 KB; some apps skip preview images over ~300 KB):
+      python3 -c "from PIL import Image; Image.open('card.png').convert('RGB')
+                  .save('assets/share.jpg', quality=88, optimize=True, progressive=True)"
+-->
+<style>
+  body { margin: 0; background: #222; display: grid; place-items: center; min-height: 100vh; }
+  canvas { max-width: 100vw; height: auto; box-shadow: 0 4px 30px #000; }
+</style>
+</head>
+<body>
+<canvas id="card" width="1200" height="630"></canvas>
+<script type="module">
+import { FontMgr } from '../js/font.js';
+
+const W = 1200, H = 630;
+const ctx = document.getElementById('card').getContext('2d');
+const load = (src) => new Promise((ok, fail) => {
+  const img = new Image();
+  img.onload = () => ok(img);
+  img.onerror = () => fail(new Error(src));
+  img.src = '../assets/img/' + src;
+});
+
+const [s32, s48, s64, pots, bat, clouds, comic, goudy] = await Promise.all(
+  ['CTSprites32.png', 'CTSprites48.png', 'CTSprites64.png', 'Teapots64.png', 'BatBoy64.png',
+   'clouds_dusk.png', 'Comic52.png', 'GoudySto65.png'].map(load));
+const fontData = await (await fetch('../assets/fonts.json')).json();
+const font = new FontMgr(fontData, { comic, goudy });
+
+// a deterministic random, so the card comes out the same every time
+let seed = 7;
+const rnd = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+
+// one sprite cell, centered at (x, y), `size` px wide, rotated `deg` clockwise
+function sprite(img, cell, index, x, y, size, deg = 0, alpha = 1, blend = 'source-over') {
+  const cols = Math.floor(img.width / cell);   // the 48-px sheet isn't a whole number of cells wide
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.globalCompositeOperation = blend;
+  ctx.translate(x, y);
+  ctx.rotate(deg * Math.PI / 180);
+  ctx.imageSmoothingQuality = 'high';
+  ctx.drawImage(img, (index % cols) * cell, Math.floor(index / cols) * cell, cell, cell,
+    -size / 2, -size / 2, size, size);
+  ctx.restore();
+}
+
+// ---- sky: the game's night gradient, dusk clouds and stars
+const sky = ctx.createLinearGradient(0, 0, 0, H);
+sky.addColorStop(0, '#07061a');
+sky.addColorStop(0.55, '#1a0828');
+sky.addColorStop(1, '#0b0410');
+ctx.fillStyle = sky;
+ctx.fillRect(0, 0, W, H);
+ctx.save();
+ctx.globalAlpha = 0.3;
+ctx.globalCompositeOperation = 'screen';
+ctx.drawImage(clouds, 0, 0, clouds.width, clouds.height, -200, -60, W + 400, H + 160);
+ctx.globalAlpha = 0.18;
+ctx.drawImage(clouds, 0, 0, clouds.width, clouds.height, W + 300, -100, -(W + 700), H + 260);
+ctx.restore();
+for (let i = 0; i < 260; i++) {
+  const x = rnd() * W, y = rnd() * H, r = rnd() < 0.08 ? 1.6 : 0.8;
+  const tint = ['#ffffff', '#ffe9c8', '#c8e6ff', '#ffd0f0'][Math.floor(rnd() * 4)];
+  ctx.globalAlpha = 0.35 + rnd() * 0.65;
+  ctx.fillStyle = tint;
+  ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+}
+ctx.globalAlpha = 1;
+// a few big twinkles (the bullet sparkle)
+for (const [x, y, s] of [[90, 470, 46], [1130, 90, 40], [640, 600, 30], [330, 250, 28], [1010, 545, 34]])
+  sprite(s64, 64, 0, x, y, s, 0, 0.9, 'lighter');
+
+// ---- the swarm (furthest first)
+// [image, cell, index, x, y, size, rotation]
+const foes = [
+  [s32, 32, 0, 120, 300, 70, -10],      // caffeine molecule
+  [s32, 32, 48, 245, 545, 64, 20],      // asterisk
+  [s48, 48, 0, 1060, 300, 96, 12],      // teacup
+  [s32, 32, 84, 935, 445, 96, -8],      // saucer
+  [s48, 48, 41, 175, 410, 108, -14],    // percolator
+  [s32, 32, 102, 1110, 480, 70, 18],    // sugar cube
+  [s48, 48, 79, 400, 530, 100, 10],     // mixer
+  [s48, 48, 173, 860, 555, 96, -6],     // colander
+  [s32, 32, 173, 1160, 235, 74, 30],    // beater
+];
+for (const f of foes) sprite(...f);
+
+// toaster popping out its muffins (Nook and Cranny), lower left
+sprite(s48, 48, 26, 300, 380, 150, -6);
+sprite(s32, 32, 136, 250, 292, 74, -24);   // Nook
+sprite(s32, 32, 158, 345, 282, 74, 18);    // Cranny
+
+// chattering teeth sneaking up from below
+sprite(s64, 64, 12, 700, 505, 100, -8);
+
+// Batboy peeking in from the lower right corner
+sprite(bat, 64, 0, 1090, 585, 150, -20);
+
+// ---- the hero: teapot facing right in its shield, firing at a croissant
+const tx = 545, ty = 400;
+sprite(s64, 64, 10, tx, ty, 240, 0, 0.5);            // shield bubble
+sprite(pots, 64, 4, tx, ty, 215);                     // teapot, 3 o'clock
+// bullets from the spout (about 0.36 x size right, 0.06 x size up of center)
+const bx = tx + 80, by = ty - 18;
+for (let i = 0; i < 3; i++) {
+  const x = bx + 34 + i * 50, y = by - 6 - i * 10;
+  sprite(s64, 64, 0, x, y, 74, 0, 1, 'lighter');
+  sprite(s64, 64, 0, x, y, 40, 0, 1, 'lighter');   // doubled for a hot center
+}
+// the croissant meeting its end, with sparks
+const cx = 790, cy = 350;
+sprite(s48, 48, 12, cx + 30, cy + 18, 130, 25);
+sprite(s48, 48, 168, cx - 18, cy - 4, 130, 0, 0.95, 'lighter');
+for (let i = 0; i < 70; i++) {
+  const a = rnd() * Math.PI * 2, d = 30 + rnd() * 95;
+  ctx.globalAlpha = 0.5 + rnd() * 0.5;
+  ctx.fillStyle = ['#ffd27a', '#ff9a3c', '#fff3c4', '#e0a060'][Math.floor(rnd() * 4)];
+  ctx.fillRect(cx + Math.cos(a) * d, cy + Math.sin(a) * d * 0.8, 3, 3);
+}
+ctx.globalAlpha = 1;
+
+// ---- text, in the game's fonts (font space is y-up, so place with translate)
+function words(x, y, str, size, bottom, top, opts = {}) {
+  font.setFont(opts.name || 'comic');
+  font.setSize(size);
+  font.setWarp(!!opts.warp);
+  font.time = 3.4;
+  const w = font.strWidth(str) * font.scale;
+  const left = opts.left ? x : x - w / 2;
+  if (opts.shadow) {
+    ctx.save();
+    ctx.translate(left + opts.shadow, y + opts.shadow);
+    font.setColor(0.07, 0.05, 0.1, 0.85);
+    font.puts(ctx, 0, 0, str);
+    ctx.restore();
+  }
+  ctx.save();
+  ctx.translate(left, y);
+  font.setColor(...bottom, 1);
+  font.setColor2(...top, 1);
+  font.puts(ctx, 0, 0, str);
+  ctx.restore();
+  font.setWarp(false);
+}
+
+// title, warped like the attract screen, pink/orange like the start screen
+font.setFont('goudy');
+const titleSize = 1060 / (font.strWidth('CHEESE TOAST') / font.font.sampleSize);   // fill ~1060 px
+words(W / 2, 168, 'CHEESE TOAST', titleSize, [1, 0.42, 0.75], [1, 0.86, 0.45], { name: 'goudy', warp: true, shadow: 9 });
+words(W / 2, 214, 'a teapot-in-space arcade game', 30, [0.5, 0.9, 1], [0.9, 1, 1], { shadow: 3 });
+words(W / 2, 618, 'Play free in your browser at ct.krazydad.com', 26, [0.5, 0.9, 1], [0.95, 1, 1], { shadow: 3 });
+
+window.cardPNG = document.getElementById('card').toDataURL('image/png');
+window.cardReady = true;
+</script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cheese Toast games</title>
+<meta name="description" content="Cheese Toast games being played right now: pick one to join.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap">
+<style>
+  /* Games being played now (the matchmaker's /mm/games), with filters and a
+     Join link into each open one.  The table sorts by any column; with many
+     games it scrolls under a sticky header. */
+  :root {
+    --bg: #000; --panel: rgba(5, 20, 30, 0.92); --line: rgba(160, 255, 255, 0.18);
+    --ink: #c0f0f4; --dim: #8fb7bd; --faint: #5f8187; --accent: #a0ffff; --pink: #ffb0d0;
+    --ok: #a0ffff; --closed: #ffb08a; --bot: #d0a0ff;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink);
+    font-family: "Comic Neue", "Chalkboard SE", "Chalkboard", "Comic Sans MS", sans-serif; font-weight: 700; }
+  body { padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 24px max(16px, env(safe-area-inset-left));
+    background: radial-gradient(ellipse at 50% -20%, #0b2a3a 0%, #000 65%) fixed; }
+  main { max-width: 860px; margin: 0 auto; }
+  header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-weight: normal; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--pink); font-size: clamp(24px, 6vw, 36px); text-shadow: 3px 3px 0 #2e2e2e; }
+  a { color: var(--accent); }
+  .btn { display: inline-block; padding: 6px 14px; border: 1px solid rgba(160, 255, 255, 0.35); border-radius: 16px;
+    background: rgba(0, 30, 45, 0.55); color: #a0d8e0; font: inherit; text-decoration: none; cursor: pointer; white-space: nowrap; }
+  .btn:hover { border-color: var(--accent); color: #fff; }
+  .btn.on { background: rgba(0, 90, 120, 0.8); border-color: var(--accent); color: #fff; }
+  .btn.join { background: rgba(0, 90, 120, 0.85); border-color: var(--accent); color: #fff; }
+  .btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; margin-bottom: 12px; }
+  .group { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .label { color: var(--dim); font-size: 14px; margin-right: 2px; }
+  .status { color: var(--faint); font-size: 13px; margin-left: auto; }
+  .wrap { max-height: calc(100vh - 190px); overflow: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 9px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: middle; }
+  tr:last-child td { border-bottom: 0; }
+  th { position: sticky; top: 0; background: #06202b; color: var(--dim); font-size: 13px; font-weight: 700; z-index: 1; }
+  th button { all: unset; cursor: pointer; }
+  th button:focus-visible { outline: 2px solid var(--accent); }
+  th .arrow { color: var(--accent); font-size: 11px; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .mode { color: #fff; white-space: nowrap; }
+  th { white-space: nowrap; }
+  .players { white-space: normal; line-height: 1.6; }
+  .who { display: inline-block; margin: 0 4px 0 0; padding: 0 8px; border-radius: 10px; background: rgba(160, 255, 255, 0.08); }
+  .who.bot { color: var(--bot); background: rgba(208, 160, 255, 0.10); }
+  .count { color: var(--faint); font-size: 13px; }
+  .tag { font-size: 12px; color: var(--faint); display: block; }
+  .open { color: var(--ok); }
+  .closed { color: var(--closed); }
+  .nobots { color: var(--bot); font-size: 12px; }
+  .empty { padding: 28px 16px; text-align: center; color: var(--dim); }
+  .empty p { margin: 6px 0; }
+  footer { margin-top: 12px; color: var(--faint); font-size: 13px; }
+  dialog { border: 1px solid rgba(160, 255, 255, 0.45); border-radius: 16px; background: var(--panel); color: var(--ink);
+    padding: 18px 22px 14px; width: min(380px, 92vw); font: inherit; }
+  dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
+  dialog h2 { margin: 0 0 12px; font-size: 24px; font-weight: normal; color: var(--accent); text-align: center; }
+  .field { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 42px; font-size: 17px; }
+  .seg { display: inline-flex; border: 1px solid rgba(160, 255, 255, 0.35); border-radius: 14px; overflow: hidden; }
+  .seg button { font: inherit; font-size: 15px; color: #a0d8e0; background: rgba(0, 30, 45, 0.55); border: 0; padding: 5px 13px; cursor: pointer; }
+  .seg button + button { border-left: 1px solid rgba(160, 255, 255, 0.25); }
+  .seg button.on { background: rgba(0, 120, 150, 0.9); color: #fff; }
+  .switch { appearance: none; -webkit-appearance: none; width: 46px; height: 26px; border-radius: 13px; margin: 0;
+    background: rgba(255, 255, 255, 0.18); position: relative; cursor: pointer; transition: background 120ms; flex: none; }
+  .switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #dfe; transition: left 120ms; }
+  .switch:checked { background: rgba(0, 150, 170, 0.9); }
+  .switch:checked::after { left: 23px; }
+  .hint { color: var(--dim); font-size: 13px; margin: 4px 0 10px; min-height: 1.2em; }
+  .actions { display: flex; justify-content: flex-end; gap: 10px; }
+  @media (max-width: 560px) {
+    th.col-age, td.col-age, th.col-level, td.col-level { display: none; }
+    th, td { padding: 8px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Games now</h1>
+    <span class="group">
+      <button class="btn join" id="new-game" title="Start a fresh game of your own">+ New game</button>
+      <a class="btn" href="../">Back to Cheese Toast</a>
+    </span>
+  </header>
+
+  <div class="filters" role="group" aria-label="Filters">
+    <div class="group" id="f-mode">
+      <span class="label">Show</span>
+      <button class="btn" data-mode="coop" aria-pressed="true">Co-op</button>
+      <button class="btn" data-mode="duel" aria-pressed="true">Duel</button>
+      <button class="btn" data-mode="melee" aria-pressed="true">Melee</button>
+    </div>
+    <div class="group" id="f-open">
+      <button class="btn" data-open="open">Open</button>
+      <button class="btn" data-open="closed">Closed</button>
+      <button class="btn" data-open="all">All</button>
+    </div>
+    <span class="status" id="status" aria-live="polite"></span>
+  </div>
+
+  <div class="wrap">
+    <table>
+      <thead><tr>
+        <th><button data-sort="mode">Game</button></th>
+        <th><button data-sort="players">Players</button></th>
+        <th class="col-level"><button data-sort="level">Level</button></th>
+        <th class="col-age"><button data-sort="age">Going for</button></th>
+        <th><button data-sort="open">Status</button></th>
+        <th></th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <dialog id="new-dlg" aria-labelledby="new-title">
+    <form method="dialog" id="new-form">
+      <h2 id="new-title">New game</h2>
+      <div class="field"><span class="label">Game</span>
+        <span class="seg" id="new-mode" role="radiogroup" aria-label="Game type">
+          <button type="button" data-mode="coop" role="radio">Co-op</button><button type="button" data-mode="duel" role="radio">Duel</button><button type="button" data-mode="melee" role="radio">Melee</button>
+        </span></div>
+      <div class="field" id="new-max-row"><span class="label">Players, up to</span>
+        <span class="seg" id="new-max" role="radiogroup" aria-label="Most players">
+          <button type="button" data-n="2" role="radio">2</button><button type="button" data-n="3" role="radio">3</button><button type="button" data-n="4" role="radio">4</button>
+        </span></div>
+      <label class="field"><span class="label">Let bots join</span><input type="checkbox" id="new-bots" class="switch" checked></label>
+      <p class="hint" id="new-hint"></p>
+      <div class="actions">
+        <button type="button" class="btn" id="new-cancel">Cancel</button>
+        <button type="submit" class="btn join" id="new-start">Start</button>
+      </div>
+    </form>
+  </dialog>
+  <footer>Open games have room and are below level 2. Bots (🤖) only join games whose players let them: anyone in a game can switch that in the game's settings (the gear).</footer>
+</main>
+<script>
+const MODE_NAMES = { coop: 'Co-op', duel: 'Duel', melee: 'Melee' };
+const PREF = 'cheesetoast.gamesFilter';
+const load = () => { try { return JSON.parse(localStorage.getItem(PREF)) || {}; } catch (e) { return {}; } };
+const save = () => { try { localStorage.setItem(PREF, JSON.stringify(f)); } catch (e) { /* private window */ } };
+const f = Object.assign({ modes: ['coop', 'duel', 'melee'], open: 'open', sort: 'open', dir: -1 }, load());
+let games = null, failed = false;
+
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const ago = (s) => (s < 60 ? `${s}s` : s < 3600 ? `${Math.round(s / 60)}m` : `${Math.floor(s / 3600)}h ${Math.round((s % 3600) / 60)}m`);
+const people = (g) => g.players.filter((p) => !p.bot).length;
+
+const KEYS = {
+  mode: (g) => ['coop', 'duel', 'melee'].indexOf(g.mode),
+  players: (g) => g.players.length,
+  level: (g) => g.level,
+  age: (g) => g.age,
+  // open first, then those with people in them, then the oldest
+  open: (g) => (g.open ? 1e9 : 0) + people(g) * 1e6 + g.age,
+};
+
+function render() {
+  for (const b of document.querySelectorAll('#f-mode .btn')) {
+    const on = f.modes.includes(b.dataset.mode); b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+  }
+  for (const b of document.querySelectorAll('#f-open .btn')) {
+    const on = f.open === b.dataset.open; b.classList.toggle('on', on); b.setAttribute('aria-pressed', on);
+  }
+  for (const b of document.querySelectorAll('th button')) {
+    const on = b.dataset.sort === f.sort;
+    b.innerHTML = b.textContent.replace(/[▲▼]$/, '').trim() + (on ? ` <span class="arrow">${f.dir > 0 ? '▲' : '▼'}</span>` : '');
+    b.closest('th').setAttribute('aria-sort', on ? (f.dir > 0 ? 'ascending' : 'descending') : 'none');
+  }
+  const rows = document.getElementById('rows');
+  if (!games) { rows.innerHTML = `<tr><td colspan="6" class="empty">${failed ? "Can't reach the game server right now." : 'Looking…'}</td></tr>`; return; }
+  const shown = games.filter((g) => f.modes.includes(g.mode) && (f.open === 'all' || (f.open === 'open') === g.open))
+    .sort((a, b) => (KEYS[f.sort](a) - KEYS[f.sort](b)) * f.dir || b.age - a.age);
+  document.getElementById('status').textContent =
+    `${shown.length} of ${games.length} game${games.length === 1 ? '' : 's'} · updated ${new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' })}`;
+  if (!shown.length) {
+    rows.innerHTML = `<tr><td colspan="6" class="empty">
+      <p>${games.length ? 'No games match these filters.' : 'Nobody is playing right now.'}</p>
+      <p><a href="#" id="start-one">Start one</a>: anyone who picks the same kind of game will be sent to you.</p></td></tr>`;
+    return;
+  }
+  rows.innerHTML = shown.map((g) => `
+    <tr>
+      <td class="mode">${MODE_NAMES[g.mode] || esc(g.mode)}${g.noBots ? '<span class="tag nobots">no bots</span>' : ''}</td>
+      <td class="players">${g.players.map((p) => `<span class="who${p.bot ? ' bot' : ''}">${esc(p.name || 'someone')}</span>`).join('')}
+        <span class="count">${g.players.length}/${g.max}</span></td>
+      <td class="num col-level">${g.level}</td>
+      <td class="num col-age">${ago(g.age)}</td>
+      <td>${g.open ? '<span class="open">open</span>' : `<span class="closed">closed</span><span class="tag">${esc(g.why)}</span>`}</td>
+      <td>${g.open ? `<a class="btn join" href="../?join=${encodeURIComponent(g.id)}&mode=${encodeURIComponent(g.mode)}">Join</a>` : ''}</td>
+    </tr>`).join('');
+}
+
+async function poll() {
+  try {
+    const r = await fetch('../mm/games', { cache: 'no-store' });
+    if (!r.ok) throw new Error(r.status);
+    games = (await r.json()).games || [];
+    failed = false;
+  } catch (e) { failed = true; if (!games) games = null; }
+  render();
+}
+
+document.getElementById('f-mode').addEventListener('click', (e) => {
+  const m = e.target.dataset && e.target.dataset.mode;
+  if (!m) return;
+  f.modes = f.modes.includes(m) ? f.modes.filter((x) => x !== m) : [...f.modes, m];
+  save(); render();
+});
+document.getElementById('f-open').addEventListener('click', (e) => {
+  const o = e.target.dataset && e.target.dataset.open;
+  if (!o) return;
+  f.open = o; save(); render();
+});
+document.querySelector('thead').addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-sort]');
+  if (!b) return;
+  if (f.sort === b.dataset.sort) f.dir = -f.dir; else { f.sort = b.dataset.sort; f.dir = b.dataset.sort === 'mode' ? 1 : -1; }
+  save(); render();
+});
+
+// ---- a new game of your own: its settings, then straight in (../?new=)
+const NEW_PREF = 'cheesetoast.newGame';
+const n = Object.assign({ mode: 'coop', max: 4, bots: true }, (() => { try { return JSON.parse(localStorage.getItem(NEW_PREF)) || {}; } catch (e) { return {}; } })());
+const dlg = document.getElementById('new-dlg');
+function renderNew() {
+  for (const b of document.querySelectorAll('#new-mode button')) { const on = b.dataset.mode === n.mode; b.classList.toggle('on', on); b.setAttribute('aria-checked', on); }
+  for (const b of document.querySelectorAll('#new-max button')) { const on = +b.dataset.n === n.max; b.classList.toggle('on', on); b.setAttribute('aria-checked', on); }
+  document.getElementById('new-max-row').style.visibility = n.mode === 'duel' ? 'hidden' : '';
+  document.getElementById('new-bots').checked = n.bots;
+  document.getElementById('new-hint').textContent = n.mode === 'duel' ? 'One on one. The first to lose all their pots goes home.'
+    : n.mode === 'melee' ? `Everyone against everyone, up to ${n.max}.` : `Together against the universe, up to ${n.max}.`;
+}
+function openNew() { renderNew(); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); }
+document.getElementById('new-game').addEventListener('click', openNew);
+document.getElementById('rows').addEventListener('click', (e) => { if (e.target.id === 'start-one') { e.preventDefault(); openNew(); } });
+document.getElementById('new-mode').addEventListener('click', (e) => { const m = e.target.dataset && e.target.dataset.mode; if (m) { n.mode = m; renderNew(); } });
+document.getElementById('new-max').addEventListener('click', (e) => { const v = e.target.dataset && +e.target.dataset.n; if (v) { n.max = v; renderNew(); } });
+document.getElementById('new-bots').addEventListener('change', (e) => { n.bots = e.target.checked; });
+document.getElementById('new-cancel').addEventListener('click', () => dlg.close());
+document.getElementById('new-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  try { localStorage.setItem(NEW_PREF, JSON.stringify(n)); } catch (err) { /* */ }
+  location.href = `../?new=1&mode=${n.mode}&max=${n.mode === 'duel' ? 2 : n.max}&bots=${n.bots ? 1 : 0}`;
+});
+
+render();
+poll();
+setInterval(() => { if (!document.hidden) poll(); }, 3000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) poll(); });
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+# systemd unit for the Hall of Cheese score server.  Install with:
+#   sudo install -m 644 ct-scores.service /etc/systemd/system/
+#   sudo systemctl daemon-reload && sudo systemctl enable --now ct-scores
+# Paths assume the server files live in ~ct/ct-scores (see tools/deploy.sh).
+[Unit]
+Description=Cheese Toast Hall of Cheese score server (ct.krazydad.com)
+After=network.target
+
+[Service]
+Type=simple
+User=ct
+Group=ct
+WorkingDirectory=/home/ct/ct-scores
+# TYPESAFE_API_KEY=... (mode 600; not in the repo)
+EnvironmentFile=-/home/ct/ct-scores/keys.env
+ExecStart=/usr/bin/python3 /home/ct/ct-scores/scores_server.py --db /home/ct/ct-scores/data/scores.db --host 127.0.0.1 --port 3002
+Restart=on-failure
+RestartSec=5
+StandardOutput=append:/home/ct/ct-scores/logs/scores.log
+StandardError=append:/home/ct/ct-scores/logs/scores.log
+
+[Install]
+WantedBy=multi-user.target

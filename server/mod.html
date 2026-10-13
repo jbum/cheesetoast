@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Cheese Toast: Hall of Cheese moderation</title>
+<style>
+  :root { --bg: #111318; --panel: #1b1f27; --ink: #e6e8ee; --dim: #9aa1ad; --line: #2c323d;
+          --cyan: #7fe9ee; --pink: #ff8fc7; --warn: #ffcf5c; --bad: #ff6b6b; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { padding: 16px; border-bottom: 1px solid var(--line); display: flex; gap: 16px;
+           align-items: baseline; flex-wrap: wrap; }
+  h1 { margin: 0; font-size: 20px; color: var(--pink); }
+  h2 { font-size: 16px; margin: 0 0 10px; color: var(--cyan); }
+  main { padding: 16px; display: grid; gap: 24px; max-width: 1200px; }
+  section { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+  .bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+  .wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th { color: var(--dim); font-weight: 600; font-size: 12px; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tr.top td:first-child { box-shadow: inset 3px 0 var(--cyan); }
+  tr.pending { background: rgba(255, 207, 92, 0.08); }
+  tr.hidden { opacity: 0.55; }
+  input, select, button { font: inherit; color: var(--ink); background: #0f1217;
+           border: 1px solid var(--line); border-radius: 5px; padding: 4px 8px; }
+  input.name { width: 14em; }
+  input.score { width: 7em; text-align: right; }
+  button { cursor: pointer; background: #222834; }
+  button:hover { border-color: var(--cyan); }
+  button.danger:hover { border-color: var(--bad); color: var(--bad); }
+  .dim { color: var(--dim); }
+  .pill { display: inline-block; padding: 1px 7px; border-radius: 9px; font-size: 12px; }
+  .pill.ok { background: rgba(127, 233, 238, 0.15); color: var(--cyan); }
+  .pill.rejected, .pill.hidden { background: rgba(255, 107, 107, 0.15); color: var(--bad); }
+  .pill.pending { background: rgba(255, 207, 92, 0.15); color: var(--warn); }
+  #msg { color: var(--warn); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Hall of Cheese moderation</h1>
+  <span class="dim">Each game mode has its own board. Highlighted rows are in their board's public top 10 (#rank). Pending entries are hidden until approved.</span>
+  <span id="msg" role="status"></span>
+</header>
+<main>
+  <section>
+    <h2>Scores</h2>
+    <div class="bar">
+      <label>Board <select id="board"><option value="">all</option></select></label>
+      <label>Show <select id="filter">
+        <option value="">all</option><option value="ok">visible</option>
+        <option value="pending">pending</option><option value="hidden">hidden</option>
+      </select></label>
+      <label>Who <select id="who">
+        <option value="">everyone</option><option value="people">people</option><option value="bots">bots</option>
+      </select></label>
+      <span id="count" class="dim"></span>
+      <button id="reload">Reload</button>
+    </div>
+    <div class="wrap"><table id="scores">
+      <thead><tr><th>#</th><th>Board</th><th>Name</th><th>Score</th><th>Level</th><th>Play time</th>
+        <th>Status</th><th>When (UTC)</th><th>IP</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+
+  <section>
+    <h2>Name verdicts</h2>
+    <p class="dim">Jev's answers are remembered per name. Override one here, or forget it so Jev is asked again next time.</p>
+    <form class="bar" id="name-form">
+      <input id="nv-name" class="name" placeholder="name" maxlength="32" required>
+      <select id="nv-verdict"><option value="ok">allow</option><option value="rejected">reject</option></select>
+      <button>Set</button>
+    </form>
+    <div class="wrap"><table id="names">
+      <thead><tr><th>Name</th><th>Verdict</th><th>Jev P(ok)</th><th>Source</th><th>When (UTC)</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table></div>
+  </section>
+</main>
+<script>
+const $ = (s) => document.querySelector(s);
+const msg = (t) => { $('#msg').textContent = t; if (t) setTimeout(() => { if ($('#msg').textContent === t) $('#msg').textContent = ''; }, 4000); };
+async function api(method, path, body) {
+  const res = await fetch(path, {
+    method, credentials: 'same-origin',
+    headers: { 'X-CT-Mod': '1', ...(body ? { 'Content-Type': 'application/json' } : {}) },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || res.statusText);
+  return data;
+}
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const when = (iso) => iso ? iso.replace('T', ' ').replace(/\+00:00$/, '') : '';
+const dur = (s) => s == null ? '' : s < 90 ? Math.round(s) + 's' : Math.round(s / 60) + 'm';
+
+const BOARD_NAMES = { single: 'Single', coop: 'Co-op', duel: 'Duel', melee: 'Melee' };
+const isBot = (name) => String(name || '').startsWith('\u{1F916}');   // fill-in bots post as "🤖 Name"
+let modes = Object.keys(BOARD_NAMES);
+
+async function loadScores() {
+  const data = await api('GET', '/api/mod/scores');
+  const { scores } = data;
+  if (data.modes) modes = data.modes;
+  // (an older server sent one combined list; ranks are per board)
+  const top = Array.isArray(data.top) ? { single: data.top } : data.top;
+  const sel = $('#board');
+  if (sel.options.length === 1)
+    for (const m of modes) sel.add(new Option(BOARD_NAMES[m] || m, m));
+  const b = sel.value, f = $('#filter').value, who = $('#who').value;
+  const rank = new Map();
+  for (const [m, ids] of Object.entries(top)) ids.forEach((id, i) => rank.set(id, i + 1));
+  const rows = scores.filter((r) => (!b || (r.mode || 'single') === b) && (!f || r.status === f) &&
+    (!who || (who === 'bots') === isBot(r.name)));
+  $('#count').textContent = `${rows.length} of ${scores.length}`;
+  $('#scores tbody').innerHTML = rows.map((r) => `
+    <tr data-id="${r.id}" class="${rank.has(r.id) ? 'top' : ''} ${r.status}">
+      <td class="dim">${rank.has(r.id) ? '#' + rank.get(r.id) : r.id}</td>
+      <td><select class="mode">${modes.map((m) =>
+        `<option value="${m}" ${m === (r.mode || 'single') ? 'selected' : ''}>${BOARD_NAMES[m] || m}</option>`).join('')}</select></td>
+      <td><input class="name" value="${esc(r.name)}" maxlength="32"></td>
+      <td><input class="score" value="${r.score}" inputmode="numeric"></td>
+      <td class="num">${r.level}</td>
+      <td class="num">${dur(r.seconds)}</td>
+      <td><select class="status">${['ok', 'pending', 'hidden'].map((s) =>
+        `<option value="${s}" ${s === r.status ? 'selected' : ''}>${s === 'ok' ? 'visible' : s}</option>`).join('')}</select></td>
+      <td class="dim">${when(r.created)}</td>
+      <td class="dim">${esc(r.ip)}</td>
+      <td><button class="save">Save</button> <button class="del danger">Delete</button></td>
+    </tr>`).join('') || '<tr><td colspan="10" class="dim">No entries.</td></tr>';
+}
+
+async function loadNames() {
+  const { names } = await api('GET', '/api/mod/names');
+  $('#names tbody').innerHTML = names.map((n) => `
+    <tr data-name="${esc(n.norm)}">
+      <td>${esc(n.norm)}</td>
+      <td><span class="pill ${n.verdict}">${n.verdict}</span></td>
+      <td class="num">${n.p_ok == null ? '' : n.p_ok.toFixed(2)}</td>
+      <td class="dim">${n.source}</td>
+      <td class="dim">${when(n.checked)}</td>
+      <td><button class="flip">${n.verdict === 'ok' ? 'Reject' : 'Allow'}</button> <button class="forget">Forget</button></td>
+    </tr>`).join('') || '<tr><td colspan="6" class="dim">No names checked yet.</td></tr>';
+}
+
+const reload = () => Promise.all([loadScores(), loadNames()]).catch((e) => msg('Error: ' + e.message));
+
+$('#scores').addEventListener('click', async (e) => {
+  const tr = e.target.closest('tr[data-id]');
+  if (!tr) return;
+  const id = tr.dataset.id;
+  try {
+    if (e.target.classList.contains('save')) {
+      await api('POST', `/api/mod/scores/${id}`, {
+        name: tr.querySelector('.name').value,
+        score: parseInt(tr.querySelector('.score').value, 10),
+        status: tr.querySelector('.status').value,
+        mode: tr.querySelector('.mode').value,
+      });
+      msg(`Saved entry ${id}.`);
+      await loadScores();
+    } else if (e.target.classList.contains('del')) {
+      if (!confirm(`Delete "${tr.querySelector('.name').value}" (${tr.querySelector('.score').value})?`)) return;
+      await api('DELETE', `/api/mod/scores/${id}`);
+      msg(`Deleted entry ${id}.`);
+      await loadScores();
+    }
+  } catch (err) { msg('Error: ' + err.message); }
+});
+
+$('#names').addEventListener('click', async (e) => {
+  const tr = e.target.closest('tr[data-name]');
+  if (!tr) return;
+  const name = tr.dataset.name;
+  try {
+    if (e.target.classList.contains('flip')) {
+      const verdict = e.target.textContent === 'Allow' ? 'ok' : 'rejected';
+      await api('POST', '/api/mod/names', { name, verdict });
+    } else if (e.target.classList.contains('forget')) {
+      await api('DELETE', '/api/mod/names?name=' + encodeURIComponent(name));
+    } else return;
+    await loadNames();
+  } catch (err) { msg('Error: ' + err.message); }
+});
+
+$('#name-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  try {
+    await api('POST', '/api/mod/names', { name: $('#nv-name').value, verdict: $('#nv-verdict').value });
+    $('#nv-name').value = '';
+    await loadNames();
+  } catch (err) { msg('Error: ' + err.message); }
+});
+
+$('#filter').addEventListener('change', loadScores);
+$('#board').addEventListener('change', loadScores);
+$('#who').addEventListener('change', loadScores);
+$('#reload').addEventListener('click', reload);
+reload();
+</script>
+</body>
+</html>
