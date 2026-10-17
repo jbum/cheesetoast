@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "type": "module",
+  "description": "Cheese Toast bots. node-datachannel lets headless bots (headless.mjs) use WebRTC without a browser.",
+  "dependencies": {
+    "node-datachannel": "^0.33.4"
+  }
+}

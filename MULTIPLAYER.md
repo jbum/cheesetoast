@@ -336,6 +336,17 @@ Done 2026-10-05 (on ctm):
   30 s it sends one heuristic bot ("🤖 Grace", hurricane names) with `joinOnly`, so a bot
   never waits in the queue itself, only joins people. Bots leave 15 s after the last
   person does, and post their score to the mode's board like anyone else.
+  **No browser since 2026-10-16:** it used to drive headless Google Chrome through
+  Playwright and relaunch it whenever it closed, which kept Chrome on a spare machine from quitting
+  or updating. Now each bot is its own Node process (bots/headless-bot.mjs) running the
+  game's real code through bots/headless.mjs: a do-nothing canvas, image sizes instead of
+  images, localStorage in memory, EventSource over fetch, WebRTC from node-datachannel
+  (`bots/package.json`), and the render* methods switched off. Before each bot starts, the
+  filler copies the site's own js/ (following imports), fonts.json and the images' sizes
+  (`syncSiteCode`, into ~/.ct-bot-code/<hash>), so bots always run what's deployed.
+  About 90 MB and 4% of a core per bot. One game per process (module-level state).
+  Try one locally: `node bots/headless-bot.mjs --url <site> --code . --mode coop`;
+  `--host-only --person` stands in for a person waiting (fill-in bots join it).
 
 Still to do:
 

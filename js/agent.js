@@ -289,15 +289,16 @@ export function installAgent(game, input, hooks = {}) {
     // joinOnly (fill-in bots, bots/filler.mjs): only join a person who is
     // waiting; if there's none, stay in attract (online().noHost turns true)
     // hostOnly (tests): just queue up, never join anyone
-    playOnline({ name, mode = 'coop', max = 4, joinOnly = false, hostOnly = false }) {
+    // person (tests): not flagged as a bot, so fill-in bots will join it
+    playOnline({ name, mode = 'coop', max = 4, joinOnly = false, hostOnly = false, person = false }) {
       if (!hooks.mp) return 'multiplayer is off (?solo)';
-      hooks.mp.botOpts = { bot: true, joinOnly: !!joinOnly, hostOnly: !!hostOnly };
+      hooks.mp.botOpts = { bot: !person, joinOnly: !!joinOnly, hostOnly: !!hostOnly };
       hooks.mp.noHost = false;
       hooks.mp.setMaxPlayers(max);
       hooks.hideStart && hooks.hideStart();
       game.snd.setEnabled(false);
       game.nameBuf = name;
-      game.local.bot = true;
+      game.local.bot = !person;
       hooks.mp.setMode(mode);
       game.anim = null; game.cameraRoll = 0; game.fgAlpha = 1;
       game.manualTicks = false;

@@ -1,7 +1,9 @@
 #!/bin/zsh
 # Install or update the fill-in bot daemon (bots/filler.mjs) on a spare machine as a
 # launchd user agent (com.krazydad.ct-filler): it watches ct.krazydad.com's
-# matchmaker and sends a bot to anyone who waits 30 s for company.
+# matchmaker and sends a bot to anyone who waits 30 s for company.  No browser:
+# the bots run the site's game code in Node (bots/headless.mjs), with
+# node-datachannel for WebRTC.
 #   tools/deploy-filler.sh [host]        (default: botbox)
 # Logs: ~/ct-filler/filler.log on that machine.  Stop it:
 #   ssh botbox launchctl bootout gui/\$(id -u)/com.krazydad.ct-filler
@@ -9,14 +11,14 @@ set -e
 TARGET=${1:-botbox}
 cd "$(dirname "$0")/.."
 ssh ${TARGET} 'mkdir -p ~/ct-filler/bots/policies'
-scp -q bots/filler.mjs bots/lib.mjs ${TARGET}:ct-filler/bots/
+scp -q bots/filler.mjs bots/lib.mjs bots/headless.mjs bots/headless-bot.mjs ${TARGET}:ct-filler/bots/
 scp -q bots/policies/heuristic.mjs bots/policies/jev.mjs ${TARGET}:ct-filler/bots/policies/
 ssh ${TARGET} 'bash -s' <<'REMOTE'
 set -e
 cd ~/ct-filler
 export PATH=/opt/homebrew/bin:$PATH
 [ -f package.json ] || echo '{"private": true, "type": "module"}' > package.json
-[ -d node_modules/playwright-core ] || npm install --silent --no-audit --no-fund playwright-core >/dev/null
+[ -d node_modules/node-datachannel ] || npm install --silent --no-audit --no-fund node-datachannel >/dev/null
 PL=~/Library/LaunchAgents/com.krazydad.ct-filler.plist
 cat > $PL <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
@@ -36,6 +38,7 @@ cat > $PL <<PLIST
 </dict></plist>
 PLIST
 launchctl bootout gui/$(id -u)/com.krazydad.ct-filler 2>/dev/null || true
+launchctl enable gui/$(id -u)/com.krazydad.ct-filler   # (in case it was turned off with launchctl disable)
 for i in 1 2 3 4 5; do sleep 2; launchctl bootstrap gui/$(id -u) $PL 2>/dev/null && break; done
 sleep 3
 tail -2 ~/ct-filler/filler.log
